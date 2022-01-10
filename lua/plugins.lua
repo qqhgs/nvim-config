@@ -10,7 +10,7 @@ local plugins = {
   },
 
   {
-    "/home/ryn/project/nvim/rynkai.nvim",
+    "qqhgs/rynkai.nvim",
     after = "packer.nvim",
     config = [[require("config.colorscheme")]],
   },
