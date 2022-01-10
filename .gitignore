@@ -1,0 +1,5 @@
+plugin/
+compiled.lua
+
+*.old
+*.bak
