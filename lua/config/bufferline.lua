@@ -13,5 +13,6 @@ bufferline.setup({
 		separator_style = { "", "" },
 		offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
 		modified_icon = " ",
+		always_show_bufferline = false,
 	},
 })

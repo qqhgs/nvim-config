@@ -21,15 +21,31 @@ local plugins = {
   },
 
   {
+    "goolord/alpha-nvim",
+    config = [[require'config.alpha']],
+  },
+
+  {
     "nvim-telescope/telescope.nvim",
-    module = "telescope",
-    cmd = "Telescope",
+    -- module = "telescope",
+    -- cmd = "Telescope",
+    opt = true,
+    setup = function()
+      vim.defer_fn(function()
+        require("packer").loader "telescope.nvim"
+      end, 0)
+    end,
     config = [[require"config.telescope"]],
   },
   {
     "ahmedkhalf/project.nvim",
     after = "telescope.nvim",
     config = [[require'config.project']],
+  },
+  {
+    "Shatur/neovim-session-manager",
+    after = "project.nvim",
+    config = [[require'config.session']],
   },
 
   {
@@ -57,6 +73,7 @@ local plugins = {
     run = ":TSUpdate",
     requires = {
       { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" },
+      { "windwp/nvim-ts-autotag", after = "nvim-ts-context-commentstring" },
     },
   },
 
@@ -106,14 +123,25 @@ local plugins = {
     config = [[require("config.gitsigns")]],
   },
 
+  {
+    "folke/which-key.nvim",
+    opt = true,
+    setup = function()
+      vim.defer_fn(function()
+        require("packer").loader "which-key.nvim"
+      end, 0)
+    end,
+    config = [[require'config.which-key']],
+  },
+
   --- Misc
   { "lukas-reineke/indent-blankline.nvim", event = "BufRead", config = [[require("config.indentline")]] }, --- Indent line
   { "numToStr/Comment.nvim", module = "Comment", config = [[require('config.comment')]] }, --- Auto comment base on filetype
   { "windwp/nvim-autopairs", after = "nvim-cmp", config = [[require("config.autopairs")]] }, --- Autopair some characters
   { "akinsho/toggleterm.nvim", after = "nvim-web-devicons", config = [[require'config.toggleterm']] },
-  { "max397574/better-escape.nvim", event = "InsertEnter", config = [[require'better_escape'.setup()]] },
+  { "norcalli/nvim-colorizer.lua", event = "BufRead", config = [[require'config.colorizer']] },
 
-  { "dstein64/vim-startuptime", cmd = "StartupTime" }, --- Top optional
+  -- { "dstein64/vim-startuptime", cmd = "StartupTime" }, --- Top optional
 } --- End of plugin lists
 
 vim.cmd "packadd packer.nvim"

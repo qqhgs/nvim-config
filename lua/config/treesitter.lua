@@ -34,6 +34,6 @@ configs.setup({
 		enable_autocmd = false,
 	},
 	indent = { enable = true },
-	-- autotag = { enable = true },
+	autotag = { enable = true },
 	-- rainbow = { enable = true },
 })

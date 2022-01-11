@@ -7,6 +7,7 @@ indent_blankline.setup({
 	indentLine_enabled = 1,
 	char = "▏",
 	filetype_exclude = {
+		"alpha",
 		"help",
 		"terminal",
 		"packer",

@@ -60,7 +60,7 @@ local keymaps = {
 		-- Find file
 		["<Leader>f"] = "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 		-- Find text
-		["<Leader>t"] = ":Telescope live_grep theme=ivy<CR>",
+		-- ["<Leader>t"] = ":Telescope live_grep theme=ivy<CR>",
 		-- No highlight search
 		["<Leader>h"] = ":nohlsearch<CR>",
 		-- Replace all word on cursor in buffer
@@ -115,6 +115,8 @@ local keymaps = {
 		-- Move current line / block with Alt-j/k like vscode.
 		["<A-j>"] = "<Esc>:m .+1<CR>==gi",
 		["<A-k>"] = "<Esc>:m .-2<CR>==gi",
+
+		["jk"] = "<Esc>",
 	},
 	term_mode = {
 
