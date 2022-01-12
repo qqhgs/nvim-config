@@ -49,10 +49,11 @@ local keys = {
     },
     S = {
       name = "Session",
-      s = "Save",
-      l = "Load Last",
-      d = "Load Last Dir",
-      f = "Find Session",
+      s = "Save current",
+      l = "Load last",
+      L = "Load current dir",
+      f = "Find session",
+			d = "Delete session",
     },
   },
   visual_mode = {

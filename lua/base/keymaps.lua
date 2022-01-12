@@ -25,6 +25,8 @@ local keymaps = {
 		-- Move current line / block with Alt-j/k like vscode.
 		["<A-k>"] = ":m .-2<CR>==",
 		["<A-j>"] = ":m .+1<CR>==",
+		["<S-j>"] = ":m .+1<CR>==",
+		["<S-k>"] = ":m .-2<CR>==",
 
 		-- I never use macros and more often mis-hit this key
 		-- ["q"] = "<Nop>",
@@ -95,8 +97,11 @@ local keymaps = {
 		["<Leader>sC"] = ":Telescope commands<cr>",
 
 		-- Session
-		["<Leader>Ss"] = ":SaveSession<CR>",
-		["<Leader>Sl"] = ":LoadLastSession!<CR>",
+		["<Leader>Sf"] = ":SessionManager load_session<CR>",
+		["<Leader>Sd"] = ":SessionManager delete_session<CR>",
+		["<Leader>Ss"] = ":SessionManager save_current_session<CR>",
+		["<Leader>Sl"] = ":SessionManager load_last_session<CR>",
+		["<Leader>SL"] = ":SessionManager load_current_dir_session<CR>",
 	},
 	insert_mode = {
 

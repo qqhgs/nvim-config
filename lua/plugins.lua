@@ -37,15 +37,25 @@ local plugins = {
     end,
     config = [[require"config.telescope"]],
   },
+
+  {
+    "nvim-telescope/telescope-ui-select.nvim",
+    after = "telescope.nvim",
+    setup = function()
+      require("telescope").load_extension "ui-select"
+    end,
+  },
+
   {
     "ahmedkhalf/project.nvim",
-    after = "telescope.nvim",
+    after = "telescope-ui-select.nvim",
     config = [[require'config.project']],
   },
+
   {
     "Shatur/neovim-session-manager",
     after = "project.nvim",
-    config = [[require'config.session']],
+    config = [[require'config.session-manager']],
   },
 
   {
@@ -141,7 +151,7 @@ local plugins = {
   { "akinsho/toggleterm.nvim", after = "nvim-web-devicons", config = [[require'config.toggleterm']] },
   { "norcalli/nvim-colorizer.lua", event = "BufRead", config = [[require'config.colorizer']] },
 
-  -- { "dstein64/vim-startuptime", cmd = "StartupTime" }, --- Top optional
+  { "dstein64/vim-startuptime", cmd = "StartupTime" }, --- Top optional
 } --- End of plugin lists
 
 vim.cmd "packadd packer.nvim"
