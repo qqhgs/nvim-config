@@ -14,10 +14,10 @@ vim.g.nvim_tree_icons = {
     unstaged = "",
     staged = "S",
     unmerged = "",
-    renamed = "➜",
+    renamed = "",
     deleted = "",
     untracked = "U",
-    ignored = "◌",
+    ignored = "",
   },
   folder = {
     arrow_open = "",
