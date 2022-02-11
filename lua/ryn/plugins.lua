@@ -1,18 +1,15 @@
 local plugins = {
 
+  "wbthomason/packer.nvim",
   "nvim-lua/plenary.nvim",
   "lewis6991/impatient.nvim",
   "nathom/filetype.nvim",
 
   {
-    "wbthomason/packer.nvim",
-    event = "VimEnter",
-  },
-
-  {
-    "qqhgs/rynkai.nvim",
-    after = "packer.nvim",
-    config = [[require("config.colorscheme")]],
+    "~/project/nvim/rynkai.nvim",
+    -- after = "packer.nvim",
+		event = "VimEnter",
+    config = [[require("ryn.plugins.colorscheme")]],
   },
 
   {
@@ -22,64 +19,65 @@ local plugins = {
 
   {
     "goolord/alpha-nvim",
-    config = [[require'config.alpha']],
+    config = [[require'ryn.plugins.alpha']],
   },
 
   {
     "nvim-telescope/telescope.nvim",
-    -- module = "telescope",
-    -- cmd = "Telescope",
+    module = "telescope",
+    cmd = "Telescope",
     opt = true,
     setup = function()
       vim.defer_fn(function()
         require("packer").loader "telescope.nvim"
       end, 0)
     end,
-    config = [[require"config.telescope"]],
+    config = [[require"ryn.plugins.telescope"]],
   },
 
-  {
-    "nvim-telescope/telescope-ui-select.nvim",
-    after = "telescope.nvim",
-    setup = function()
-      require("telescope").load_extension "ui-select"
-    end,
-  },
 
   {
     "ahmedkhalf/project.nvim",
-    after = "telescope-ui-select.nvim",
-    config = [[require'config.project']],
+    after = "telescope.nvim",
+    config = [[require'ryn.plugins.project']],
   },
 
   {
-    "Shatur/neovim-session-manager",
-    after = "project.nvim",
-    config = [[require'config.session-manager']],
+    "folke/persistence.nvim",
+    after = "alpha-nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    module = "persistence",
+    config = [[require('persistence').setup()]],
   },
 
   {
     "kyazdani42/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    config = [[require"config.nvimtree"]],
+    -- cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    opt = true,
+    setup = function()
+      vim.defer_fn(function()
+        require("packer").loader "nvim-tree.lua"
+      end, 0)
+    end,
+    config = [[require"ryn.plugins.nvimtree"]],
   },
 
   {
     "nvim-lualine/lualine.nvim",
     after = "nvim-web-devicons",
-    config = [[require"config.lualine"]],
+    config = [[require"ryn.plugins.lualine"]],
   },
 
   {
     "akinsho/bufferline.nvim",
     after = "nvim-web-devicons",
-    config = [[require"config.bufferline"]],
+    config = [[require"ryn.plugins.bufferline"]],
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
     event = "BufRead",
-    config = [[require("config.treesitter")]],
+    config = [[require("ryn.plugins.treesitter")]],
     run = ":TSUpdate",
     requires = {
       { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" },
@@ -96,16 +94,16 @@ local plugins = {
         "L3MON4D3/LuaSnip",
         wants = "friendly-snippets",
         after = "nvim-cmp",
-        config = [[require("config.luasnip")]],
+        config = [[require("ryn.plugins.luasnip")]],
       },
       { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
       { "hrsh7th/cmp-nvim-lua", after = "cmp_luasnip" },
       { "hrsh7th/cmp-nvim-lsp", after = "cmp-nvim-lua" },
-      { "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" },
+      { "hrsh7th/cmp-buffer", after = "cmp-nvim-lua" },
       { "hrsh7th/cmp-path", after = "cmp-buffer" },
       { "hrsh7th/cmp-cmdline", after = "cmp-path" },
     },
-    config = [[require("config.cmp")]],
+    config = [[require("ryn.plugins.cmp")]],
   },
 
   {
@@ -116,11 +114,11 @@ local plugins = {
         require("packer").loader "nvim-lspconfig"
       end, 0)
     end,
-    config = [[require("config.lsp")]],
+    config = [[require("ryn.plugins.lsp")]],
   },
   { "williamboman/nvim-lsp-installer", after = "nvim-lspconfig" }, --- automate lsp configuration steps
-  { "jose-elias-alvarez/null-ls.nvim", after = "nvim-lsp-installer", config = [[require"config.lsp.null-ls"]] }, --- Formatting and linting
-  -- { "ray-x/lsp_signature.nvim", after = "null-ls.nvim", config = [[require"config.lsp.signature"]] },
+  { "jose-elias-alvarez/null-ls.nvim", after = "nvim-lsp-installer", config = [[require"ryn.plugins.lsp.null-ls"]] }, --- Formatting and linting
+  { "ray-x/lsp_signature.nvim", after = "null-ls.nvim", config = [[require"ryn.plugins.lsp.signature"]] },
 
   {
     "lewis6991/gitsigns.nvim",
@@ -130,7 +128,7 @@ local plugins = {
         require("packer").loader "gitsigns.nvim"
       end, 0)
     end,
-    config = [[require("config.gitsigns")]],
+    config = [[require("ryn.plugins.gitsigns")]],
   },
 
   {
@@ -141,15 +139,15 @@ local plugins = {
         require("packer").loader "which-key.nvim"
       end, 0)
     end,
-    config = [[require'config.which-key']],
+    config = [[require'ryn.plugins.which-key']],
   },
 
   --- Misc
-  { "lukas-reineke/indent-blankline.nvim", event = "BufRead", config = [[require("config.indentline")]] }, --- Indent line
-  { "numToStr/Comment.nvim", module = "Comment", config = [[require('config.comment')]] }, --- Auto comment base on filetype
-  { "windwp/nvim-autopairs", after = "nvim-cmp", config = [[require("config.autopairs")]] }, --- Autopair some characters
-  { "akinsho/toggleterm.nvim", after = "nvim-web-devicons", config = [[require'config.toggleterm']] },
-  { "norcalli/nvim-colorizer.lua", event = "BufRead", config = [[require'config.colorizer']] },
+  { "lukas-reineke/indent-blankline.nvim", event = "BufRead", config = [[require("ryn.plugins.indentline")]] }, --- Indent line
+  { "numToStr/Comment.nvim", module = "Comment", config = [[require('ryn.plugins.comment')]] }, --- Auto comment base on filetype
+  { "windwp/nvim-autopairs", after = "nvim-cmp", config = [[require("ryn.plugins.autopairs")]] }, --- Autopair some characters
+  { "akinsho/toggleterm.nvim", after = "nvim-web-devicons", config = [[require'ryn.plugins.toggleterm']] },
+  { "norcalli/nvim-colorizer.lua", event = "BufRead", config = [[require'ryn.plugins.colorizer']] },
 
   { "dstein64/vim-startuptime", cmd = "StartupTime" }, --- Top optional
 } --- End of plugin lists
@@ -180,7 +178,7 @@ do --- Hacky way of auto clean/install/compile
 	augroup plugins
 	" Reload plugins.lua
 		autocmd!
-		autocmd BufWritePost plugins.lua lua package.loaded["plugins"] = nil; require("plugins")
+		autocmd BufWritePost plugins.lua lua package.loaded["ryn.plugins"] = nil; require("ryn.plugins")
 		autocmd BufWritePost plugins.lua PackerClean
 	augroup END
 	]]
@@ -216,7 +214,7 @@ packer.init {
   },
   auto_clean = true,
   compile_on_sync = true,
-  compile_path = vim.fn.stdpath "config" .. "/lua/compiled.lua",
+  compile_path = vim.fn.stdpath "config" .. "/lua/ryn/compiled.lua",
 }
 
 packer.startup {

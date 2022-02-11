@@ -47,13 +47,11 @@ local keys = {
       k = "Keymaps",
       C = "Commands",
     },
-    S = {
+    q = {
       name = "Session",
-      s = "Save current",
+      s = "Load dir",
       l = "Load last",
-      L = "Load current dir",
-      f = "Find session",
-			d = "Delete session",
+      d = "Stop",
     },
   },
   visual_mode = {
@@ -96,7 +94,7 @@ which_key.setup {
     enabled = true,
   },
   icons = {
-    separator = "➜ ",
+    separator = "->",
   },
 }
 which_key.register(keys.normal_mode, opts.normal_mode)

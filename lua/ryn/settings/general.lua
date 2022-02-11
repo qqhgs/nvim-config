@@ -37,3 +37,5 @@ end
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
+vim.cmd([[hi Normal guibg=#1A1826]])
+vim.cmd([[hi NormalFloat guibg=#1F2430]])

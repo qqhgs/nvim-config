@@ -25,8 +25,6 @@ local keymaps = {
 		-- Move current line / block with Alt-j/k like vscode.
 		["<A-k>"] = ":m .-2<CR>==",
 		["<A-j>"] = ":m .+1<CR>==",
-		["<S-j>"] = ":m .+1<CR>==",
-		["<S-k>"] = ":m .-2<CR>==",
 
 		-- I never use macros and more often mis-hit this key
 		-- ["q"] = "<Nop>",
@@ -97,11 +95,9 @@ local keymaps = {
 		["<Leader>sC"] = ":Telescope commands<cr>",
 
 		-- Session
-		["<Leader>Sf"] = ":SessionManager load_session<CR>",
-		["<Leader>Sd"] = ":SessionManager delete_session<CR>",
-		["<Leader>Ss"] = ":SessionManager save_current_session<CR>",
-		["<Leader>Sl"] = ":SessionManager load_last_session<CR>",
-		["<Leader>SL"] = ":SessionManager load_current_dir_session<CR>",
+		["<Leader>qs"] = ":lua require('persistence').load()<CR>",
+		["<Leader>ql"] = ":lua require('persistence').load({ last = true })<CR>",
+		["<Leader>qd"] = ":lua require('persistence').stop()<CR>",
 	},
 	insert_mode = {
 
@@ -202,10 +198,10 @@ end
 map("n", "<F6>", ":terminal lazygit<CR>", { noremap = true, silent = false })
 
 -- Add Packer commands because we are not loading it at startup
-vim.cmd("silent! command PackerClean lua require 'plugins' require('packer').clean()")
-vim.cmd("silent! command PackerCompile lua require 'plugins' require('packer').compile()")
-vim.cmd("silent! command PackerInstall lua require 'plugins' require('packer').install()")
-vim.cmd("silent! command PackerStatus lua require 'plugins' require('packer').status()")
-vim.cmd("silent! command PackerSync lua require 'plugins' require('packer').sync()")
-vim.cmd("silent! command PackerUpdate lua require 'plugins' require('packer').update()")
-vim.cmd("silent! command PackerProfile lua require 'plugins' require('packer').profile_output()")
+vim.cmd("silent! command PackerClean lua require 'ryn.plugins' require('packer').clean()")
+vim.cmd("silent! command PackerCompile lua require 'ryn.plugins' require('packer').compile()")
+vim.cmd("silent! command PackerInstall lua require 'ryn.plugins' require('packer').install()")
+vim.cmd("silent! command PackerStatus lua require 'ryn.plugins' require('packer').status()")
+vim.cmd("silent! command PackerSync lua require 'ryn.plugins' require('packer').sync()")
+vim.cmd("silent! command PackerUpdate lua require 'ryn.plugins' require('packer').update()")
+vim.cmd("silent! command PackerProfile lua require 'ryn.plugins' require('packer').profile_output()")

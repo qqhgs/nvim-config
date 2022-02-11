@@ -1,4 +1,5 @@
 plugin/
+sessions/
 compiled.lua
 
 *.old

@@ -84,33 +84,22 @@ local components = {
 	diagnostics = {
 		"diagnostics",
 		sources = { "nvim_diagnostic" },
-		-- sections = { "error", "warn" },
+		sections = { "error", "warn" },
 		symbols = { error = " ", warn = " ", info = " ", hint = " " },
 		-- colored = false,
 		update_in_insert = false,
-		-- always_visible = true,
-		cond = conds.hide_in_width,
-	},
-	scrollbar = {
-		function()
-			local current_line = vim.fn.line(".")
-			local total_lines = vim.fn.line("$")
-			local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
-			local line_ratio = current_line / total_lines
-			local index = math.ceil(line_ratio * #chars)
-			return chars[index]
-		end,
-		padding = { left = 0, right = 0 },
+		always_visible = true,
 		cond = conds.hide_in_width,
 	},
 }
 
 lualine.setup({
 	options = {
-		-- section_separators = { left = "", right = "" },
+		section_separators = { left = " ", right = " " },
+		-- component_separators = { left = " ", right = " " },
 		component_separators = { left = "", right = "" },
-		disabled_filetypes = { "NvimTree", "toggleterm" },
-		theme = "rynkai",
+		disabled_filetypes = { "NvimTree", "toggleterm", "alpha" },
+		theme = "auto",
 	},
 	sections = {
 		lualine_a = {
@@ -118,25 +107,21 @@ lualine.setup({
 		},
 		lualine_b = {
 			components.branch,
+			components.diff,
 		},
 		lualine_c = {
 			components.filename,
-			components.filesize,
-			components.diagnostics,
-			components.diff,
 		},
 		lualine_x = {
 			components.treesitter,
 			components.lsp,
-			components.encoding,
 			"filetype",
 		},
 		lualine_y = {
-			components.location,
+			components.diagnostics,
 		},
 		lualine_z = {
-			-- components.scrollbar,
-			components.progress,
+			components.location,
 		},
 	},
 })

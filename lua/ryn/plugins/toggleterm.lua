@@ -5,13 +5,13 @@ end
 
 toggleterm.setup({
 	open_mapping = [[<C-t>]],
-	direction = "float",
+	-- direction = "float",
 	float_opts = {
 		border = "curved",
-		winblend = 3,
+		winblend = 5,
 		highlights = {
-			border = "PmenuSel",
-			background = "PMenu",
+			border = "NormalFloat",
+			background = "NormalFloat",
 		},
 	},
 })

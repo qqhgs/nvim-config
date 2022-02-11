@@ -6,4 +6,4 @@ vim.cmd([[
   augroup end
 ]])
 
-vim.cmd([[ command! LspToggleAutoFormat execute 'lua require("base.util").toggle_format_on_save()' ]])
+vim.cmd([[ command! LspToggleAutoFormat execute 'lua require("ryn.util").toggle_format_on_save()' ]])
