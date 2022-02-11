@@ -8,7 +8,7 @@ local plugins = {
   {
     "qqhgs/rynkai.nvim",
     -- after = "packer.nvim",
-		event = "VimEnter",
+    event = "VimEnter",
     config = [[require("ryn.plugins.colorscheme")]],
   },
 
@@ -34,7 +34,6 @@ local plugins = {
     end,
     config = [[require"ryn.plugins.telescope"]],
   },
-
 
   {
     "ahmedkhalf/project.nvim",
@@ -114,11 +113,10 @@ local plugins = {
         require("packer").loader "nvim-lspconfig"
       end, 0)
     end,
-    config = [[require("ryn.plugins.lsp")]],
+    -- config = [[require("ryn.plugins.lsp")]],
   },
   { "williamboman/nvim-lsp-installer", after = "nvim-lspconfig" }, --- automate lsp configuration steps
-  { "jose-elias-alvarez/null-ls.nvim", after = "nvim-lsp-installer", config = [[require"ryn.plugins.lsp.null-ls"]] }, --- Formatting and linting
-  { "ray-x/lsp_signature.nvim", after = "null-ls.nvim", config = [[require"ryn.plugins.lsp.signature"]] },
+  { "jose-elias-alvarez/null-ls.nvim", after = "nvim-lsp-installer", config = [[require"ryn.plugins.lsp"]] }, --- Formatting and linting
 
   {
     "lewis6991/gitsigns.nvim",
