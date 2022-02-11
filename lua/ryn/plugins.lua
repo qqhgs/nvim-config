@@ -7,8 +7,7 @@ local plugins = {
 
   {
     "qqhgs/rynkai.nvim",
-    -- after = "packer.nvim",
-    event = "VimEnter",
+    after = "packer.nvim",
     config = [[require("ryn.plugins.colorscheme")]],
   },
 
@@ -96,9 +95,9 @@ local plugins = {
         config = [[require("ryn.plugins.luasnip")]],
       },
       { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
-      { "hrsh7th/cmp-nvim-lua", after = "cmp_luasnip" },
-      { "hrsh7th/cmp-nvim-lsp", after = "cmp-nvim-lua" },
-      { "hrsh7th/cmp-buffer", after = "cmp-nvim-lua" },
+      -- { "hrsh7th/cmp-nvim-lua", after = "cmp_luasnip" },
+      { "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" },
+      { "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" },
       { "hrsh7th/cmp-path", after = "cmp-buffer" },
       { "hrsh7th/cmp-cmdline", after = "cmp-path" },
     },
@@ -113,7 +112,6 @@ local plugins = {
         require("packer").loader "nvim-lspconfig"
       end, 0)
     end,
-    -- config = [[require("ryn.plugins.lsp")]],
   },
   { "williamboman/nvim-lsp-installer", after = "nvim-lspconfig" }, --- automate lsp configuration steps
   { "jose-elias-alvarez/null-ls.nvim", after = "nvim-lsp-installer", config = [[require"ryn.plugins.lsp"]] }, --- Formatting and linting
@@ -147,7 +145,7 @@ local plugins = {
   { "akinsho/toggleterm.nvim", after = "nvim-web-devicons", config = [[require'ryn.plugins.toggleterm']] },
   { "norcalli/nvim-colorizer.lua", event = "BufRead", config = [[require'ryn.plugins.colorizer']] },
 
-  { "dstein64/vim-startuptime", cmd = "StartupTime" }, --- Top optional
+  -- { "dstein64/vim-startuptime", cmd = "StartupTime" }, --- Top optional
 } --- End of plugin lists
 
 vim.cmd "packadd packer.nvim"

@@ -18,7 +18,7 @@ end
 local configs = {
   sources = {
     { name = "nvim_lsp" },
-    { name = "nvim_lua" },
+    -- { name = "nvim_lua" },
     {
       name = "buffer",
       option = {
@@ -33,7 +33,7 @@ local configs = {
   },
   source_names = {
     nvim_lsp = "[Lsp]",
-    nvim_lua = "[Nvim]",
+    -- nvim_lua = "[Nvim]",
     buffer = "[Buff]",
     path = "[Path]",
     cmdline = "[CMD]",
