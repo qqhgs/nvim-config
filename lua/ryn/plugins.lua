@@ -6,7 +6,7 @@ local plugins = {
   "nathom/filetype.nvim",
 
   {
-    "~/project/nvim/rynkai.nvim",
+    "qqhgs/rynkai.nvim",
     -- after = "packer.nvim",
 		event = "VimEnter",
     config = [[require("ryn.plugins.colorscheme")]],

@@ -1,5 +1,5 @@
 require("rynkai").setup {
-	theme = "catppuccin", -- this field is a must. Don't remove it, just change the value.
+	theme = "ayu", -- this field is a must. Don't remove it, just change the value.
 }
 
 vim.cmd [[

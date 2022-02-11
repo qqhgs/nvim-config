@@ -79,7 +79,7 @@ local keymaps = {
 		["<Leader>pc"] = ":PackerCompile<CR>",
 		["<Leader>ps"] = ":PackerSync<CR>",
 		["<Leader>pS"] = ":PackerStatus<CR>",
-		["<Leader>pu"] = ":PackerUpdate<StatusCR>",
+		["<Leader>pu"] = ":PackerUpdate<CR>",
 		["<Leader>pi"] = ":PackerInstall<CR>",
 		["<Leader>pp"] = ":PackerProfile<CR>",
 
