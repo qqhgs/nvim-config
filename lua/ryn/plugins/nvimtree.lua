@@ -67,7 +67,7 @@ nvim_tree.setup {
     dotfiles = true,
   },
 	git = {
-		ignore = false,
+		ignore = true,
 	},
   view = {
     mappings = {
