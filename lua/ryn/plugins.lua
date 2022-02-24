@@ -95,8 +95,8 @@ local plugins = {
         config = [[require("ryn.plugins.luasnip")]],
       },
       { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
-      -- { "hrsh7th/cmp-nvim-lua", after = "cmp_luasnip" },
-      { "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" },
+      { "hrsh7th/cmp-nvim-lua", after = "cmp_luasnip" },
+      { "hrsh7th/cmp-nvim-lsp", after = "cmp-nvim-lua" },
       { "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" },
       { "hrsh7th/cmp-path", after = "cmp-buffer" },
       { "hrsh7th/cmp-cmdline", after = "cmp-path" },
@@ -112,9 +112,10 @@ local plugins = {
         require("packer").loader "nvim-lspconfig"
       end, 0)
     end,
+		config = [[require"ryn.plugins.lsp"]] 
   },
   { "williamboman/nvim-lsp-installer", after = "nvim-lspconfig" }, --- automate lsp configuration steps
-  { "jose-elias-alvarez/null-ls.nvim", after = "nvim-lsp-installer", config = [[require"ryn.plugins.lsp"]] }, --- Formatting and linting
+  { "jose-elias-alvarez/null-ls.nvim", after = "nvim-lsp-installer", config = [[require"ryn.plugins.lsp.null-ls"]]}, --- Formatting and linting
 
   {
     "lewis6991/gitsigns.nvim",
@@ -139,7 +140,7 @@ local plugins = {
   },
 
   --- Misc
-  { "lukas-reineke/indent-blankline.nvim", event = "BufRead", config = [[require("ryn.plugins.indentline")]] }, --- Indent line
+  { "lukas-reineke/indent-blankline.nvim", after = "rynkai.nvim", config = [[require("ryn.plugins.indentline")]] }, --- Indent line
   { "numToStr/Comment.nvim", module = "Comment", config = [[require('ryn.plugins.comment')]] }, --- Auto comment base on filetype
   { "windwp/nvim-autopairs", after = "nvim-cmp", config = [[require("ryn.plugins.autopairs")]] }, --- Autopair some characters
   { "akinsho/toggleterm.nvim", after = "nvim-web-devicons", config = [[require'ryn.plugins.toggleterm']] },

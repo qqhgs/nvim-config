@@ -6,4 +6,4 @@ end
 -- require "user.lsp.lsp-signature"
 require "ryn.plugins.lsp.installer"
 require("ryn.plugins.lsp.handlers").setup()
-require "ryn.plugins.lsp.null-ls"
+-- require "ryn.plugins.lsp.null-ls"
