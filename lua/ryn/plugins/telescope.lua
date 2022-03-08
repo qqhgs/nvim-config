@@ -1,36 +1,35 @@
-local ready, telescope = pcall(require, "telescope")
-if not ready then
-	return
+local M = {}
+
+M.config = function()
+  local actions = require "telescope.actions"
+  Ryn.builtins.telescope = {
+    defaults = {
+      prompt_prefix = "  ",
+      selection_caret = " ",
+      path_display = { "smart" },
+      mappings = {
+        i = {
+          ["<C-n>"] = actions.cycle_history_next,
+          ["<C-p>"] = actions.cycle_history_prev,
+          ["<C-j>"] = actions.move_selection_next,
+          ["<C-k>"] = actions.move_selection_previous,
+          ["<C-o>"] = actions.select_default,
+          ["<C-?>"] = actions.which_key,
+        },
+        n = {
+          ["<C-o>"] = actions.select_default,
+        },
+      },
+    },
+    pickers = {},
+    extensions = { ["ui-select"] = {
+      require("telescope.themes").get_dropdown {},
+    } },
+  }
 end
 
-local actions = require("telescope.actions")
+M.setup = function()
+  require("telescope").setup(Ryn.builtins.telescope)
+end
 
-telescope.setup({
-	defaults = {
-
-		prompt_prefix = "  ",
-		selection_caret = " ",
-		path_display = { "smart" },
-
-		mappings = {
-			i = {
-				["<C-n>"] = actions.cycle_history_next,
-				["<C-p>"] = actions.cycle_history_prev,
-				["<C-j>"] = actions.move_selection_next,
-				["<C-k>"] = actions.move_selection_previous,
-				["<C-o>"] = actions.select_default,
-				["<C-?>"] = actions.which_key,
-			},
-
-			n = {
-				["<C-o>"] = actions.select_default,
-			},
-		},
-	},
-	pickers = {},
-	extensions = {
-		["ui-select"] = {
-			require("telescope.themes").get_dropdown {}
-		}
-	},
-})
+return M

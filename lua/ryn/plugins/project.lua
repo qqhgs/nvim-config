@@ -1,13 +1,14 @@
-local ready, project = pcall(require, "project_nvim")
-if not ready then
-	return
-end
-project.setup({
-	patterns = { ".git", "Makefile", "package.json" },
-})
+local M = {}
 
-local present, telescope = pcall(require, "telescope")
-if not present then
-	return
+M.config = function()
+  Ryn.builtins.project = {
+    patterns = { ".git", "Makefile", "package.json" },
+  }
 end
-telescope.load_extension("projects")
+
+M.setup = function()
+  require("project_nvim").setup(Ryn.builtins.project)
+  require("telescope").load_extension "projects"
+end
+
+return M

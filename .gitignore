@@ -1,5 +1,6 @@
 plugin/
 sessions/
+user/
 compiled.lua
 
 *.old
