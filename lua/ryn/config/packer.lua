@@ -1,6 +1,5 @@
+local utils = require "ryn.utils"
 vim.cmd "packadd packer.nvim"
-
-local plugins = require "ryn.config.plugins"
 
 local present, packer = pcall(require, "packer")
 
@@ -39,12 +38,14 @@ packer.init {
   compile_path = vim.fn.stdpath "config" .. "/lua/ryn/compiled.lua",
 }
 
+local plugins = require "ryn.config.plugins"
+plugins = utils.remove_def_plugins(plugins)
+
 packer.startup {
   function(use)
-    for _, plugin in ipairs { plugins, Ryn.plugins } do
+    for _, plugin in ipairs { plugins, Ryn.plugins.includes } do
       use(plugin)
     end
   end,
 }
-
 return packer

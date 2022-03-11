@@ -6,4 +6,5 @@ vim.cmd [[
   augroup end
 ]]
 
+vim.cmd [[ command! BufferKill lua require('ryn.plugins.bufferline').buf_kill('bd') ]]
 vim.cmd [[ command! LspToggleAutoFormat execute 'lua require("ryn.utils").toggle_format_on_save()' ]]

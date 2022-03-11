@@ -2,62 +2,55 @@ local utils = require "ryn.utils"
 
 local M = {}
 
+function M:load_core()
+  local cores = {
+    "options",
+    -- "keymaps",
+  }
+
+  for _, core in ipairs(cores) do
+    require("ryn.config." .. core).config()
+  end
+
+  local user_config = vim.fn.stdpath "config" .. "/config.lua"
+  pcall(dofile, user_config or {})
+
+  for _, core in ipairs(cores) do
+    require("ryn.config." .. core).setup()
+  end
+end
+
 function M:init()
   -- set global variable
   if vim.tbl_isempty(Ryn or {}) then
     Ryn = vim.deepcopy(require "ryn.config.defaults")
   end
 
+  require("ryn.config.keymaps").load_defaults()
+  require("ryn.config.keymaps").add_keymaps(require "ryn.user.keymaps")
+
   require "ryn.config.autocmds"
 
-  -- assign basic options and keymaps
-  for _, v in
-    ipairs {
-      "options",
-      "keymaps",
-    }
-  do
-    require("ryn.config." .. v).config()
-  end
+  -- set some options and apply user config if exist
+  M:load_core()
+end
 
-  -- assign defaults config for each builtin plugins
-  local configs = {
-    "comment",
-    "cmp",
-    "rynkai",
-    "nvimtree",
-    "autopairs",
-    "bufferline",
-    "gitsigns",
-    "indentline",
-    "lsp",
-    "statusline",
-    "null_ls",
-    "telescope",
-    "project",
-    "luasnip",
-    "toggleterm",
-    "whichkey",
-    "treesitter",
-  }
+function M:load()
+  -- This function will get all lua file inside param director and call `config` func
+  -- Make sure you know what you do if you want to add another file inside
+  local configs = utils.list_files(vim.fn.stdpath "config" .. "/lua/ryn/plugins")
   for _, config in ipairs(configs) do
     require("ryn.plugins." .. config).config()
   end
 
-  -- load user configs if safely
-  pcall(require, "ryn.user.config")
+  -- Merge into global variables for plugins purpose
+  utils.merge_to_left(Ryn.builtins, Ryn.builtins.user or {})
 
-  -- merge user configs into Ryn global variable
-  local user_config_present, user_config = pcall(require, "ryn.user")
-  if user_config_present then
-    utils.merge_to_left(Ryn, user_config)
-  end
+  require("ryn.config.keymaps").load(Ryn.keys)
 
   if Ryn.format_on_save then
     utils.enable_format_on_save()
   end
-
-  pcall(require, "ryn.config.setup")
 end
 
 return M

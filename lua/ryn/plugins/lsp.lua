@@ -74,10 +74,8 @@ M.setup = function()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   local function on_attach(client, bufnr)
-    local present, lsp_settings = pcall(require, "ryn.user.lsp_settings")
-    if present then
-      local on_attach_user = lsp_settings.on_attach
-      for key, callback in pairs(on_attach_user) do
+    if Ryn.lsp_settings ~= nil then
+      for key, callback in pairs(Ryn.lsp_settings.on_attach or {}) do
         if client.name == key then
           callback(client)
         end
@@ -89,9 +87,9 @@ M.setup = function()
 
   require("nvim-lsp-installer").on_server_ready(function(server)
     local opts = { on_attach = on_attach, capabilities = capabilities }
-    local present, lsp_settings = pcall(require, "ryn.user.lsp_settings")
-    if present then
-      for server_name, server_config in pairs(lsp_settings.servers) do
+
+    if Ryn.lsp_settings ~= nil then
+      for server_name, server_config in pairs(Ryn.lsp_settings.servers or {}) do
         if server.name == server_name then
           opts = vim.tbl_deep_extend("force", server_config, opts)
         end

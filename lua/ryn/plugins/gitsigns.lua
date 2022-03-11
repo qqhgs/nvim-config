@@ -1,4 +1,3 @@
-local gitsigns = require "gitsigns"
 local M = {}
 
 M.config = function()
@@ -53,6 +52,10 @@ M.config = function()
 end
 
 M.setup = function()
+local present, gitsigns = pcall(require, "gitsigns")
+  if not present then
+    return
+  end
   gitsigns.setup(Ryn.builtins.gitsigns)
 end
 

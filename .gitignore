@@ -1,7 +1,7 @@
-plugin/
 sessions/
-user/
 compiled.lua
+user/
+config.lua
 
 *.old
 *.bak

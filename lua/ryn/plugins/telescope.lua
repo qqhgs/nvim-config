@@ -1,7 +1,10 @@
 local M = {}
 
 M.config = function()
-  local actions = require "telescope.actions"
+  local present, actions = pcall(require, "telescope.actions")
+  if not present then
+    return
+  end
   Ryn.builtins.telescope = {
     defaults = {
       prompt_prefix = "  ",

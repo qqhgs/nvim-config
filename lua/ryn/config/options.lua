@@ -40,8 +40,8 @@ M.setup = function()
 
   vim.cmd "set whichwrap+=<,>,[,],h,l"
   vim.cmd [[set iskeyword+=-]]
-  -- vim.cmd([[hi Normal guibg=#1A1826]])
-  -- vim.cmd([[hi NormalFloat guibg=#1F2430]])
+  vim.cmd([[hi Normal guibg=#1A1826]])
+  vim.cmd([[hi NormalFloat guibg=#1F2430]])
 end
 
 return M

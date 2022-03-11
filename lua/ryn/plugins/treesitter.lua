@@ -2,9 +2,7 @@ local M = {}
 
 M.config = function()
   Ryn.builtins.treesitter = {
-    ensure_installed = {
-      "lua",
-    },
+    ensure_installed = {},
     highlight = {
       enable = true,
       use_languagetree = true,

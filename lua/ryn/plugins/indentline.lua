@@ -1,4 +1,3 @@
-local indent_blankline = require "indent_blankline"
 local M = {}
 
 M.config = function()
@@ -13,6 +12,7 @@ M.config = function()
       "lspinfo",
       "TelescopePrompt",
       "TelescopeResults",
+      "NvimTree",
     },
     buftype_exclude = { "terminal" },
     show_trailing_blankline_indent = false,
@@ -21,7 +21,7 @@ M.config = function()
 end
 
 M.setup = function()
-  indent_blankline.setup(Ryn.builtins.indentline)
+  require("indent_blankline").setup(Ryn.builtins.indentline)
 end
 
 return M
