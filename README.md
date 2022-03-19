@@ -1,6 +1,7 @@
-<h1 align="center">RYN</h1>
+<h1 align="center">rynvim</h1>
 
 <div align="center">
+<img src="./assets/intro.png" alt="ryn"/>
 <img src="./assets/default.png" alt="ryn"/>
 <a href="https://github.com/neovim/neovim">
 <img src="https://img.shields.io/badge/Neovim-0.6.1-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=white" alt="Neovim minimum version"/>
@@ -9,7 +10,7 @@
 
 ## Pre-requisites
 
-- Neovim (0.6.1+)
+- Neovim (0.7.0+)
 - Nerd Font
 - ripgrep (optional)
 
@@ -17,12 +18,10 @@
 
 > What you have to know? I do this on linux (void-linux--for-now), so idk how this configs work on other operating system like windows and mac. Here's is how to get this on linux.
 
-> There is some file and dir with `.examples` suffix. Remove that suffix and try to understand inside this thing if you want to make your own preferences.
-
 1. Make sure to backup anything on `~/.config/nvim` if you need. Then just clone this repo.
 
 ```bash
-git clone https://github.com/qqhgs/ryn ~/.config/nvim --depth 1
+git clone https://github.com/qqhgs/rynvim ~/.config/nvim --depth 1
 ```
 
 2. Enter neovim `nvim` and you will got my message on command line (shortly, run `PackerSync` or press `space+p+s`). Or just enter neovim with `nvim +PackerSync` command.

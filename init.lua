@@ -3,11 +3,9 @@ if impatient_present then
   impatient.enable_profile()
 end
 
-require("ryn.config"):init()
+require("user")
 
-if vim.fn.empty(vim.fn.glob(vim.fn.stdpath "config" .. "/lua/ryn/compiled.lua")) > 0 then
+local compiled_present, _ = pcall(require, "user.compiled")
+if not compiled_present then
   print "compiled.lua not found. run 'PackerSync' or type <SPACE>ps"
-else
-  require("ryn.config"):load()
-  require "ryn.compiled"
 end
