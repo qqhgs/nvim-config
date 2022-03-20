@@ -15,6 +15,7 @@ local configs = {
     ["<Leader>lh"] = ":lua vim.lsp.buf.hover()<CR>",
     ["<Leader>li"] = ":LspInfo<CR>",
     ["<Leader>lr"] = ":lua vim.lsp.buf.rename()<CR>",
+    ["<Leader>ls"] = ":lua vim.lsp.buf.signature_help()<CR>",
     ["<Leader>lq"] = ":lua vim.diagnostic.setloclist()<CR>",
   },
   setup = {
@@ -42,6 +43,9 @@ vim.fn.sign_define("DiagnosticSignInfo", { text = sign.info, texthl = "Diagnosti
 vim.diagnostic.config(configs.setup)
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "rounded",
+})
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
   border = "rounded",
 })
 local function highlight_document(client)

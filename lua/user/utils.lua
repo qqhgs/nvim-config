@@ -41,4 +41,10 @@ M.list_files = function(directory, return_type)
   return results
 end
 
+M.defer = function(plugin)
+  vim.defer_fn(function()
+    require("packer").loader(plugin)
+  end, 0)
+end
+
 return M

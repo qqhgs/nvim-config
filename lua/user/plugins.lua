@@ -56,9 +56,9 @@ packer.init {
 
 return packer.startup(function(use)
   use "wbthomason/packer.nvim"
-  use "nvim-lua/plenary.nvim"
   use "lewis6991/impatient.nvim"
   use "nathom/filetype.nvim"
+  use "nvim-lua/plenary.nvim"
 
   use {
     "qqhgs/rynkai.nvim",
@@ -96,18 +96,16 @@ return packer.startup(function(use)
   }
   use {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufRead",
-    config = function()
-      require "user.modules.indentline"
-    end,
+    opt = true,
+    setup = [[require"user.utils".defer"indent-blankline.nvim"]],
+    config = [[require"user.modules.indentline"]],
   }
   use {
     "nvim-telescope/telescope.nvim",
-    module = "telescope",
-    cmd = "Telescope",
-    config = function()
-      require "user.modules.telescope"
-    end,
+    opt = true,
+    setup = [[require"user.utils".defer"telescope.nvim"]],
+    config = [[require"user.modules.telescope"]],
+    requires = "project.nvim",
   }
   use {
     "ahmedkhalf/project.nvim",
@@ -133,7 +131,11 @@ return packer.startup(function(use)
   use { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" }
   use { "windwp/nvim-ts-autotag", after = "nvim-treesitter" }
 
-  use { "rafamadriz/friendly-snippets", event = "InsertEnter" }
+  use {
+    "rafamadriz/friendly-snippets",
+    opt = true,
+    setup = [[require"user.utils".defer"friendly-snippets"]],
+  }
   use { "hrsh7th/nvim-cmp", config = [[require"user.modules.cmp"]], after = "friendly-snippets" }
   use { "L3MON4D3/LuaSnip", wants = "friendly-snippets", after = "nvim-cmp" }
   use { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" }
@@ -143,19 +145,47 @@ return packer.startup(function(use)
   use { "hrsh7th/cmp-cmdline", after = "cmp-path" }
   use { "hrsh7th/cmp-nvim-lua", after = "cmp-cmdline" }
 
-  use { "neovim/nvim-lspconfig", config = [[require"user.modules.lsp"]] }
-  use { "jose-elias-alvarez/null-ls.nvim", config = [[require"user.modules.null_ls"]] }
-  use "williamboman/nvim-lsp-installer"
+  use {
+    "neovim/nvim-lspconfig",
+    opt = true,
+    setup = function()
+      require("user.utils").defer "nvim-lspconfig"
+    end,
+    requires = "williamboman/nvim-lsp-installer",
+    config = [[require"user.modules.lsp"]],
+  }
+  use { "jose-elias-alvarez/null-ls.nvim", config = [[require"user.modules.null_ls"]], after = "nvim-lspconfig" }
+  use { "williamboman/nvim-lsp-installer", opt = "true" }
+  use { "ray-x/lsp_signature.nvim", config = [[require"user.modules.signature"]], after = "nvim-lspconfig" }
 
-  use { "lewis6991/gitsigns.nvim", config = [[require"user.modules.gitsigns"]] }
-  use { "folke/which-key.nvim", config = [[require"user.modules.whichkey"]] }
-  use { "numToStr/Comment.nvim", config = [[require"user.modules.comment"]] }
-  use { "windwp/nvim-autopairs", config = [[require"user.modules.autopairs"]] }
-  use { "akinsho/toggleterm.nvim", config = [[require"user.modules.toggleterm"]] }
-  use "folke/persistence.nvim"
-  use { "norcalli/nvim-colorizer.lua", config = [[require"user.modules.colorizer"]] }
+  use {
+    "lewis6991/gitsigns.nvim",
+    opt = true,
+    event = "BufRead",
+    config = [[require"user.modules.gitsigns"]],
+  }
+  use {
+    "folke/which-key.nvim",
+    opt = true,
+    setup = [[require"user.utils".defer"which-key.nvim"]],
+    config = [[require"user.modules.whichkey"]],
+  }
+  use { "numToStr/Comment.nvim", config = [[require"user.modules.comment"]], after = "nvim-treesitter" }
+  use {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = [[require"user.modules.autopairs"]],
+  }
+  use {
+    "akinsho/toggleterm.nvim",
+    opt = true,
+    setup = [[require"user.utils".defer"toggleterm.nvim"]],
+    config = [[require"user.modules.toggleterm"]],
+  }
+  use { "folke/persistence.nvim", after = "alpha-nvim", config = [[require"persistence".setup()]] }
+  use { "norcalli/nvim-colorizer.lua", config = [[require"user.modules.colorizer"]], opt = true, event = "BufRead" }
 
-  use "dstein64/vim-startuptime"
+  use { "dstein64/vim-startuptime", opt = true, setup = [[require"user.utils".defer"vim-startuptime"]] }
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()

@@ -1,15 +1,15 @@
-local utils = require "user.utils"
-
-local settings = utils.list_files(vim.fn.stdpath "config" .. "/lua/user/settings")
-for _, name in ipairs(settings) do
-  require("user.settings." .. name)
-end
-
-require "user.plugins"
-
--- local modules = utils.list_files(vim.fn.stdpath "config" .. "/lua/user/modules")
--- for _, module in ipairs(modules) do
---   require("user.modules." .. module)
+-- local settings = require("user.utils").list_files(vim.fn.stdpath "config" .. "/lua/user/settings")
+-- for _, name in ipairs(settings) do
+--   require("user." .. name)
 -- end
 
-require("persistence").setup()
+-- require "user.plugins"
+local cores = {
+	"autocmds",
+	"options",
+	"keymaps",
+	"plugins"
+}
+for _, core in ipairs(cores) do
+  require("user." .. core)
+end
