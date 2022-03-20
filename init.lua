@@ -3,7 +3,15 @@ if impatient_present then
   impatient.enable_profile()
 end
 
-require("user")
+local cores = {
+  "autocmds",
+  "options",
+  "keymaps",
+  "plugins",
+}
+for _, core in ipairs(cores) do
+  require("user." .. core)
+end
 
 local compiled_present, _ = pcall(require, "user.compiled")
 if not compiled_present then

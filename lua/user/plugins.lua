@@ -145,18 +145,10 @@ return packer.startup(function(use)
   use { "hrsh7th/cmp-cmdline", after = "cmp-path" }
   use { "hrsh7th/cmp-nvim-lua", after = "cmp-cmdline" }
 
-  use {
-    "neovim/nvim-lspconfig",
-    opt = true,
-    setup = function()
-      require("user.utils").defer "nvim-lspconfig"
-    end,
-    requires = "williamboman/nvim-lsp-installer",
-    config = [[require"user.modules.lsp"]],
-  }
+  use { "williamboman/nvim-lsp-installer", opt = true, setup = [[require"user.utils".defer"nvim-lsp-installer"]]}
+  use { "neovim/nvim-lspconfig", after = "nvim-lsp-installer", config = [[require"user.modules.lsp"]], }
   use { "jose-elias-alvarez/null-ls.nvim", config = [[require"user.modules.null_ls"]], after = "nvim-lspconfig" }
-  use { "williamboman/nvim-lsp-installer", opt = "true" }
-  use { "ray-x/lsp_signature.nvim", config = [[require"user.modules.signature"]], after = "nvim-lspconfig" }
+  use { "ray-x/lsp_signature.nvim", config = [[require"user.modules.signature"]], after = "null-ls.nvim" }
 
   use {
     "lewis6991/gitsigns.nvim",
