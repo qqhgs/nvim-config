@@ -61,8 +61,8 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim"
 
   use {
-    "qqhgs/rynkai.nvim",
-    -- "~/project/nvim/rynkai.nvim",
+    -- "qqhgs/rynkai.nvim",
+    "~/project/nvim/rynkai.nvim",
     event = "VimEnter",
     config = function()
       require "user.modules.rynkai"
@@ -132,12 +132,13 @@ return packer.startup(function(use)
   use { "windwp/nvim-ts-autotag", after = "nvim-treesitter" }
 
   use {
-    "rafamadriz/friendly-snippets",
+    "hrsh7th/nvim-cmp",
+    config = [[require"user.modules.cmp"]],
+    -- event = { "InsertEnter", "CmdlineEnter" },
     opt = true,
-    setup = [[require"user.utils".defer"friendly-snippets"]],
+    setup = [[require"user.utils".defer"nvim-cmp"]],
   }
-  use { "hrsh7th/nvim-cmp", config = [[require"user.modules.cmp"]], after = "friendly-snippets" }
-  use { "L3MON4D3/LuaSnip", wants = "friendly-snippets", after = "nvim-cmp" }
+  use { "L3MON4D3/LuaSnip", after = "nvim-cmp", config = [[require"user.modules.luasnip"]] }
   use { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" }
   use { "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" }
   use { "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" }
@@ -145,8 +146,8 @@ return packer.startup(function(use)
   use { "hrsh7th/cmp-cmdline", after = "cmp-path" }
   use { "hrsh7th/cmp-nvim-lua", after = "cmp-cmdline" }
 
-  use { "williamboman/nvim-lsp-installer", opt = true, setup = [[require"user.utils".defer"nvim-lsp-installer"]]}
-  use { "neovim/nvim-lspconfig", after = "nvim-lsp-installer", config = [[require"user.modules.lsp"]], }
+  use { "williamboman/nvim-lsp-installer", opt = true, setup = [[require"user.utils".defer"nvim-lsp-installer"]] }
+  use { "neovim/nvim-lspconfig", after = "nvim-lsp-installer", config = [[require"user.modules.lsp"]] }
   use { "jose-elias-alvarez/null-ls.nvim", config = [[require"user.modules.null_ls"]], after = "nvim-lspconfig" }
   use { "ray-x/lsp_signature.nvim", config = [[require"user.modules.signature"]], after = "null-ls.nvim" }
 
