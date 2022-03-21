@@ -57,7 +57,6 @@ packer.init {
 return packer.startup(function(use)
   use "wbthomason/packer.nvim"
   use "lewis6991/impatient.nvim"
-  use "nathom/filetype.nvim"
   use "nvim-lua/plenary.nvim"
 
   use {
@@ -105,7 +104,6 @@ return packer.startup(function(use)
     opt = true,
     setup = [[require"user.utils".defer"telescope.nvim"]],
     config = [[require"user.modules.telescope"]],
-    requires = "project.nvim",
   }
   use {
     "ahmedkhalf/project.nvim",
@@ -126,6 +124,9 @@ return packer.startup(function(use)
     config = function()
       require "user.modules.treesitter"
     end,
+		requires = {
+			"nathom/filetype.nvim",
+		},
     run = ":TSUpdate",
   }
   use { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" }
@@ -176,9 +177,9 @@ return packer.startup(function(use)
     config = [[require"user.modules.toggleterm"]],
   }
   use { "folke/persistence.nvim", after = "alpha-nvim", config = [[require"persistence".setup()]] }
-  use { "norcalli/nvim-colorizer.lua", config = [[require"user.modules.colorizer"]], opt = true, event = "BufRead" }
+  use { "norcalli/nvim-colorizer.lua", config = [[require"user.modules.colorizer"]], event = "BufRead" }
 
-  use { "dstein64/vim-startuptime", opt = true, setup = [[require"user.utils".defer"vim-startuptime"]] }
+  use { "dstein64/vim-startuptime", cmd = "StartupTime" }
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
