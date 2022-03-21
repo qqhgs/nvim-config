@@ -1,0 +1,19 @@
+{
+	"name": "rynvim",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "all"
+        ],
+        "path": "./snippets/global.json"
+      },
+      {
+        "language": [
+          "lua"
+        ],
+        "path": "./snippets/lua.json"
+      }
+    ]
+  }
+}

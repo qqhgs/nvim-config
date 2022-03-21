@@ -1,0 +1,7 @@
+{
+  "require": {
+    "prefix": "lpreq",
+    "body": ["local ${1:_}, ${2:_} = pcall(require, \"${3:module}\")${0}"],
+    "description": "Local pcall module"
+  }
+}
