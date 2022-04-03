@@ -27,6 +27,7 @@ local configs = {
     highlight = "PmenuSel",
     highlight_grey = "LineNr",
   },
+	map_c_w = true,
 }
 
 autopairs.setup(configs)

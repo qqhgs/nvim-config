@@ -13,10 +13,11 @@ local keys = {
     ["/"] = "Comment line",
     b = {
       name = "Buffers",
-      b = { ":BufferLineCyclePrev<CR>", "Cycle" },
-      c = { ":lua require('user.utils').close_all_but_current()<CR>", "Close all but current" }, -- TODO: implement this for bufferline
+      c = { ":lua require('user.util').close_all_but_current()<CR>", "Close all but current" }, -- TODO: implement this for bufferline
       d = { ":%bd!<CR>", "Close all" }, -- TODO: implement this for bufferline
       f = "Find",
+      h = { ":BufferLineCyclePrev<CR>", "Prev" },
+      l = { ":BufferLineCycleNext<CR>", "Next" },
       p = "Pick",
     },
     g = {

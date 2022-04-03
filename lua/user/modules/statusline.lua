@@ -93,7 +93,7 @@ local configs = {
 		globalstatus = 3,
     section_separators = { left = " ", right = " " },
     component_separators = { left = "", right = "" },
-    disabled_filetypes = { "NvimTree", "alpha" },
+    disabled_filetypes = { "neo-tree", "alpha" },
     theme = "auto",
   },
   sections = {

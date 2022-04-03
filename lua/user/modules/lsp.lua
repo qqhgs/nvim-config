@@ -15,6 +15,7 @@ local configs = {
     ["<Leader>lh"] = ":lua vim.lsp.buf.hover()<CR>",
     ["<Leader>li"] = ":LspInfo<CR>",
     ["<Leader>lr"] = ":lua vim.lsp.buf.rename()<CR>",
+    ["<Leader>lR"] = ":LspRestart<CR>",
     ["<Leader>ls"] = ":lua vim.lsp.buf.signature_help()<CR>",
     ["<Leader>lq"] = ":lua vim.diagnostic.setloclist()<CR>",
   },

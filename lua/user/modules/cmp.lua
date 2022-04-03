@@ -1,4 +1,4 @@
-local utils = require "user.utils"
+local util = require "user.util"
 local M = {}
 M.methods = {}
 
@@ -188,7 +188,7 @@ local configs = {
       name = "buffer",
       option = {
         get_bufnrs = function()
-          return utils.list_bufs_active()
+          return util.list_bufs_active()
         end,
       },
     },

@@ -1,6 +1,6 @@
 local autocmd_groups = {
   __generals = {
-    { "FileType", "qf,help,man", "nnoremap <silent> <buffer> q :close<CR>" },
+    { "FileType", "qf,help,man,startuptime,packer", "nnoremap <silent> <buffer> q :close<CR>" },
     {
       "TextYankPost",
       "*",

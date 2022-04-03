@@ -17,6 +17,22 @@ M.close_all_but_current = function()
   end
 end
 
+-- set keymap
+-- @params string Mode
+-- @params string Mapping
+-- @params string Commands
+-- @params table Option (optional)
+M.keymap = function(mode, key, val, opt)
+	if opt == nil then
+		opt = { noremap = true, silent = true }
+	end
+  if val then
+    vim.keymap.set(mode, key, val, opt)
+  else
+    vim.keymap.del(mode, key)
+  end
+end
+
 -- list of lua file inside specified directory
 M.list_files = function(directory, return_type)
   local results = {}

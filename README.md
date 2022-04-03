@@ -24,8 +24,8 @@
 git clone https://github.com/qqhgs/rynvim ~/.config/nvim --depth 1
 ```
 
-2. Enter neovim `nvim` and you will got my message on command line (shortly, run `PackerSync` or press `space+p+s`). Or just enter neovim with `nvim +PackerSync` command.
-3. Exit and enter neovim like usual. `nvim`
+2. Enter neovim `nvim` and wait for this config do his jobs.
+3. Restart `neovim`.
 
 ## Install Language support
 

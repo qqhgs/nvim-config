@@ -1,3 +1,4 @@
+local util = require"user.util"
 local present, telescope = pcall(require, "telescope")
 if not present then
   return
@@ -34,3 +35,6 @@ local configs = {
 }
 
 telescope.setup(configs)
+
+util.keymap("n", "<C-p>", ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{no_ignore = true, previewer = false})<CR>")
+util.keymap("n", "<Leader>bf", ":lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<CR>")

@@ -15,6 +15,7 @@ local configs = {
     "TelescopePrompt",
     "TelescopeResults",
     "NvimTree",
+		"neo-tree",
   },
   buftype_exclude = { "terminal" },
   show_trailing_blankline_indent = false,

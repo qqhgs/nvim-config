@@ -15,5 +15,6 @@ end
 
 local compiled_present, _ = pcall(require, "user.compiled")
 if not compiled_present then
-  print "compiled.lua not found. run 'PackerSync' or type <SPACE>ps"
+	vim.cmd [[PackerCompile]]
+	-- print "compiled.lua not found. run 'PackerSync' or type <SPACE>ps"
 end

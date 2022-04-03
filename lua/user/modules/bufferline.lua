@@ -1,3 +1,5 @@
+local util = require"user.util"
+
 local present, bufferline = pcall(require, "bufferline")
 if not present then
   return
@@ -7,17 +9,16 @@ local configs = {
     close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
     right_mouse_command = "vert sbuffer %d", -- can be a string | function, see "Mouse actions"
     left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-    diagnostics = "nvim_lsp",
-    diagnostics_indicator = function(count, level)
-      local icon = level:match "error" and " " or " "
-      return " " .. icon .. count .. " "
-    end,
+    -- diagnostics = "nvim_lsp",
+    -- diagnostics_indicator = function(count, level)
+    --   local icon = level:match "error" and " " or " "
+    --   return " " .. icon .. count .. " "
+    -- end,
     separator_style = { "", "" },
     offsets = {
       {
-        filetype = "NvimTree",
-        text = "",
-        highlight = "NvimTreeNormal",
+        filetype = "neo-tree",
+        highlight = "NeoTreeNormal",
         padding = 1,
       },
     },
@@ -29,7 +30,7 @@ local configs = {
     end,
     modified_icon = " ",
     show_buffer_icons = true, -- disable filetype icons for buffers
-    show_buffer_close_icons = true,
+    show_buffer_close_icons = false,
     show_close_icon = false,
     show_tab_indicators = true,
     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
@@ -42,14 +43,7 @@ local configs = {
 bufferline.setup(configs)
 
 
-local bufferline_present, _ = pcall(require, "bufferline")
-if bufferline_present then
-  vim.cmd [[ command! BufferKill lua require('user.modules.bufferline').buf_kill('bd!') ]]
-end
-
-local M = {}
-
-function M.buf_kill(kill_command, bufnr, force)
+local function buf_kill(kill_command, bufnr, force)
   local bo = vim.bo
   local api = vim.api
 
@@ -106,4 +100,11 @@ function M.buf_kill(kill_command, bufnr, force)
   end
 end
 
-return M
+
+-- Close buffer with this keymap
+util.keymap("n", "<Leader>c", function ()
+	buf_kill("bd!")
+end)
+
+util.keymap("n", "<Leader>bp", ":BufferLinePick<CR>")
+util.keymap("n", "<Leader>bc", ":BufferLinePickClose<CR>")

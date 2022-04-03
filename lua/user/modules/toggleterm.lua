@@ -1,3 +1,5 @@
+local util = require"user.util"
+
 local present, toggleterm = pcall(require, "toggleterm")
 if not present then
   return
@@ -64,5 +66,5 @@ function __WUZZ_TOGGLE()
   setup("wuzz"):toggle()
 end
 
-vim.api.nvim_set_keymap("n", "<F6>", ":lua __LAZYGIT_TOGGLE()<CR>", { noremap = true, silent = false })
-vim.api.nvim_set_keymap("n", "<F7>", ":lua __WUZZ_TOGGLE()<CR>", { noremap = true, silent = false })
+util.keymap("n", "<F6>", ":lua __LAZYGIT_TOGGLE()<CR>")
+util.keymap("n", "<F7>", ":lua __WUZZ_TOGGLE()<CR>")

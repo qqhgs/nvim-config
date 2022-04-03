@@ -13,7 +13,13 @@
           "lua"
         ],
         "path": "./snippets/lua.json"
-      }
+      },
+			{
+				"language": [
+					"go"
+				],
+				"path": "./snippets/go.json"
+			}
     ]
   }
 }
