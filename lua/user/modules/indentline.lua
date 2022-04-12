@@ -4,7 +4,6 @@ if not present then
 end
 
 local configs = {
-  indentLine_enabled = 1,
   char = "▏",
   filetype_exclude = {
     "alpha",
@@ -13,12 +12,30 @@ local configs = {
     "packer",
     "lspinfo",
     "TelescopePrompt",
+		"lsp-installer",
     "TelescopeResults",
-    "NvimTree",
 		"neo-tree",
   },
   buftype_exclude = { "terminal" },
   show_trailing_blankline_indent = false,
-  show_first_indent_level = false,
+  show_first_indent_level = true,
+	-- use_treesitter = true,
+	-- show_current_context = true,
+	-- show_current_context_start = true,
+	-- max_indent_increase = 1,
+	-- context_patterns = {
+	-- 	"table",
+	-- 	"dictionary",
+	-- 	"list",
+	-- 	"array",
+	-- 	"object",
+	-- 	"class",
+	-- 	"function",
+	-- 	"method",
+	-- 	"parameters",
+	-- 	"expression_list",
+	-- 	"for_statement",
+	-- 	"if",
+	-- }
 }
 indentline.setup(configs)

@@ -20,7 +20,7 @@ local configs = {
         ["<C-p>"] = actions.cycle_history_prev,
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
-        ["<C-o>"] = actions.select_default,
+        -- ["<C-o>"] = actions.select_default,
         ["<C-?>"] = actions.which_key,
       },
       n = {
@@ -38,3 +38,5 @@ telescope.setup(configs)
 
 util.keymap("n", "<C-p>", ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{no_ignore = true, previewer = false})<CR>")
 util.keymap("n", "<Leader>bf", ":lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<CR>")
+
+telescope.load_extension("ui-select")

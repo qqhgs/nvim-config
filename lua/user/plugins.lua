@@ -74,6 +74,7 @@ return packer.startup(function(use)
 
   use {
     "akinsho/bufferline.nvim",
+		commit = "50e1bfe6f2c474c0a6e8171606b001f3b17ddeb2",
     after = "nvim-web-devicons",
     config = function()
       require "user.modules.bufferline"
@@ -112,6 +113,10 @@ return packer.startup(function(use)
     setup = [[require"user.util".defer"telescope.nvim"]],
     config = [[require"user.modules.telescope"]],
   }
+	use {
+		"nvim-telescope/telescope-ui-select.nvim",
+		after = "telescope.nvim",
+	}
   use {
     "ahmedkhalf/project.nvim",
     after = "telescope.nvim",
@@ -186,6 +191,7 @@ return packer.startup(function(use)
   }
   use {
     "akinsho/toggleterm.nvim",
+		commit = "e62008fe5879eaecb105eb81e393f87d4607164c",
     opt = true,
     setup = [[require"user.util".defer"toggleterm.nvim"]],
     config = [[require"user.modules.toggleterm"]],

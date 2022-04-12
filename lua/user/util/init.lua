@@ -23,9 +23,9 @@ end
 -- @params string Commands
 -- @params table Option (optional)
 M.keymap = function(mode, key, val, opt)
-	if opt == nil then
-		opt = { noremap = true, silent = true }
-	end
+  if opt == nil then
+    opt = { noremap = true, silent = true }
+  end
   if val then
     vim.keymap.set(mode, key, val, opt)
   else

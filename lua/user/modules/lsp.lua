@@ -1,3 +1,5 @@
+local util = require "lspconfig.util"
+
 local configs = {
   sign = {
     error = "",
@@ -95,6 +97,21 @@ local lsp_settings = {
             maxPreload = 100000,
             preloadFileSize = 10000,
           },
+        },
+      },
+    },
+    ["gopls"] = {
+      cmd = { "gopls", "serve" },
+      filetypes = { "go", "gomod" },
+      root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+      settings = {
+        gopls = {
+          -- analyses = {
+            -- unusedparams = true,
+          -- },
+          -- staticcheck = true,
+          -- usePlaceholders = false,
+          memoryMode = "DegradeClosed",
         },
       },
     },

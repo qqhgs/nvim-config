@@ -1,5 +1,5 @@
 {
-	"name": "rynvim",
+  "name": "rynvim",
   "contributes": {
     "snippets": [
       {
@@ -14,12 +14,13 @@
         ],
         "path": "./snippets/lua.json"
       },
-			{
-				"language": [
-					"go"
-				],
-				"path": "./snippets/go.json"
-			}
+      {
+        "language": [
+          "go"
+        ],
+        "path": "./snippets/go.json"
+      }
     ]
-  }
+  },
+  "devDependencies": {}
 }
