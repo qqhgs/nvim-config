@@ -14,6 +14,7 @@ local autocmd_groups = {
     { "FileType", "qf", "set nobuflisted" },
     { "VimLeavePre", "*", "set title set titleold=" },
     { "TermOpen", "*", "setlocal nonumber norelativenumber" },
+    { "VimEnter,BufEnter,BufLeave", "*", "lua require'user.util'.toggle_statusline()" },
   },
 }
 

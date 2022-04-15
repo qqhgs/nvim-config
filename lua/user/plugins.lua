@@ -62,8 +62,8 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim"
 
   use {
-    "qqhgs/rynkai.nvim",
-    -- "~/project/nvim/rynkai.nvim",
+    -- "qqhgs/rynkai.nvim",
+    "~/project/nvim/rynkai.nvim",
     event = "VimEnter",
     config = function()
       require "user.modules.rynkai"
@@ -85,7 +85,7 @@ return packer.startup(function(use)
     "nvim-lualine/lualine.nvim",
     after = "nvim-web-devicons",
     config = function()
-      require "user.modules.statusline"
+      require "user.modules.lualine"
     end,
   }
 
