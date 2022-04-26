@@ -12,7 +12,7 @@ local config_file = vim.fn.stdpath "config" .. "/lua/user/modules/rynkai.lua"
 local rynkai_dir = vim.fn.stdpath "data" .. "/site/pack/packer/opt/rynkai.nvim/lua/rynkai/colors/"
 
 rynkai.setup {
-  theme = "gruvbox", -- this field is a must.
+  theme = "ayu", -- this field is a must.
   config_file = config_file,
   rynkai_dir = rynkai_dir,
 }

@@ -66,7 +66,7 @@ end
 M.toggle_statusline = function()
 	local opt = {
 		"neo-tree",
-		"toggleterm",
+		-- "toggleterm",
 		"alpha",
 	}
 	local ft = vim.bo.filetype

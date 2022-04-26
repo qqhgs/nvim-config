@@ -22,6 +22,8 @@ local configs = {
         ["<C-k>"] = actions.move_selection_previous,
         -- ["<C-o>"] = actions.select_default,
         ["<C-?>"] = actions.which_key,
+        ["<C-s>"] = actions.select_horizontal,
+        ["<C-v>"] = actions.select_vertical,
       },
       n = {
         ["<C-o>"] = actions.select_default,

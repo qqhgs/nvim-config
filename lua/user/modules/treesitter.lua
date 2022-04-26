@@ -36,6 +36,9 @@ local configs = {
   autotag = {
     enable = true,
   },
+	matchup = {
+		enable = true,
+	},
 }
 
 -- vim.opt.foldmethod = "expr"
