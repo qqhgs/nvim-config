@@ -62,15 +62,17 @@ return packer.startup(function(use)
 	use "nvim-lua/plenary.nvim"
 
 	use {
-		"qqhgs/rynkai.nvim",
+		-- "qqhgs/rynkai.nvim",
 		-- "~/project/nvim/rynkai.nvim",
+		"projekt0n/github-nvim-theme",
 		event = "VimEnter",
 		config = function()
-			require "user.modules.rynkai"
+			-- require "user.modules.rynkai"
+			require "user.modules.theme"
 		end,
 	}
 
-	use { "kyazdani42/nvim-web-devicons", after = "rynkai.nvim" }
+	use { "kyazdani42/nvim-web-devicons", after = "github-nvim-theme" }
 
 	use {
 		"akinsho/bufferline.nvim",
@@ -109,9 +111,10 @@ return packer.startup(function(use)
 	}
 	use {
 		"nvim-telescope/telescope.nvim",
-		opt = true,
-		setup = [[require"user.util".defer"telescope.nvim"]],
+		-- opt = true,
+		-- setup = [[require"user.util".defer"telescope.nvim"]],
 		config = [[require"user.modules.telescope"]],
+		-- config = [[require"telescope".setup()]],
 	}
 	use {
 		"nvim-telescope/telescope-ui-select.nvim",

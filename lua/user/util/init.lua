@@ -60,7 +60,7 @@ end
 M.defer = function(plugin)
 	vim.defer_fn(function()
 		require("packer").loader(plugin)
-	end, 0)
+	end, 100)
 end
 
 M.toggle_statusline = function()
