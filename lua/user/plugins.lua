@@ -64,7 +64,7 @@ return packer.startup(function(use)
 	use {
 		-- "qqhgs/rynkai.nvim",
 		-- "~/project/nvim/rynkai.nvim",
-		"projekt0n/github-nvim-theme",
+		"olimorris/onedarkpro.nvim",
 		event = "VimEnter",
 		config = function()
 			-- require "user.modules.rynkai"
@@ -72,7 +72,7 @@ return packer.startup(function(use)
 		end,
 	}
 
-	use { "kyazdani42/nvim-web-devicons", after = "github-nvim-theme" }
+	use { "kyazdani42/nvim-web-devicons", after = "onedarkpro.nvim" }
 
 	use {
 		"akinsho/bufferline.nvim",
@@ -109,16 +109,14 @@ return packer.startup(function(use)
 		-- setup = [[require"user.util".defer"indent-blankline.nvim"]],
 		config = [[require"user.modules.indentline"]],
 	}
+	use { "nvim-telescope/telescope-ui-select.nvim" }
 	use {
 		"nvim-telescope/telescope.nvim",
 		-- opt = true,
 		-- setup = [[require"user.util".defer"telescope.nvim"]],
 		config = [[require"user.modules.telescope"]],
 		-- config = [[require"telescope".setup()]],
-	}
-	use {
-		"nvim-telescope/telescope-ui-select.nvim",
-		after = "telescope.nvim",
+		-- after = "telescope-ui-select.nvim",
 	}
 	use {
 		"ahmedkhalf/project.nvim",
@@ -167,6 +165,12 @@ return packer.startup(function(use)
 	use { "neovim/nvim-lspconfig", after = "nvim-lsp-installer", config = [[require"user.modules.lsp"]] }
 	use { "jose-elias-alvarez/null-ls.nvim", config = [[require"user.modules.null_ls"]], after = "nvim-lspconfig" }
 	use { "ray-x/lsp_signature.nvim", config = [[require"user.modules.signature"]], after = "null-ls.nvim" }
+	use {
+		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		config = function()
+			require("lsp_lines").register_lsp_virtual_lines()
+		end,
+	}
 
 	use {
 		"lewis6991/gitsigns.nvim",
@@ -228,4 +232,3 @@ return packer.startup(function(use)
 		require("packer").sync()
 	end
 end)
-

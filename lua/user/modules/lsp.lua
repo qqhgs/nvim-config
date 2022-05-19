@@ -24,7 +24,7 @@ local configs = {
 		["<Leader>lq"] = ":lua vim.diagnostic.setloclist()<CR>",
 	},
 	setup = {
-		virtual_text = true,
+		virtual_text = false,
 		update_in_insert = true,
 		underline = true,
 		severity_sort = true,
@@ -138,7 +138,6 @@ local function on_attach(client, bufnr)
 	keymaps(bufnr)
 	highlight_document(client)
 end
-
 
 if lsp_settings ~= nil then
 	for name, config in pairs(lsp_settings.servers) do

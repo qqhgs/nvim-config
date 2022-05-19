@@ -19,7 +19,13 @@
           "go"
         ],
         "path": "./snippets/go.json"
-      }
+      },
+			{
+				"language": [
+					"typescriptreact"
+				],
+				"path": "./snippets/typescriptreact.json"
+			}
     ]
   },
   "devDependencies": {}
