@@ -63,16 +63,14 @@ return packer.startup(function(use)
 
 	use {
 		-- "qqhgs/rynkai.nvim",
-		-- "~/project/nvim/rynkai.nvim",
-		"olimorris/onedarkpro.nvim",
+		"~/project/nvim/rynkai.nvim",
 		event = "VimEnter",
 		config = function()
-			-- require "user.modules.rynkai"
-			require "user.modules.theme"
+			require "user.modules.rynkai"
 		end,
 	}
 
-	use { "kyazdani42/nvim-web-devicons", after = "onedarkpro.nvim" }
+	use { "kyazdani42/nvim-web-devicons", after = "rynkai.nvim" }
 
 	use {
 		"akinsho/bufferline.nvim",
@@ -167,6 +165,7 @@ return packer.startup(function(use)
 	use { "ray-x/lsp_signature.nvim", config = [[require"user.modules.signature"]], after = "null-ls.nvim" }
 	use {
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		-- after = "lsp_signature.nvim",
 		config = function()
 			require("lsp_lines").register_lsp_virtual_lines()
 		end,
@@ -225,6 +224,8 @@ return packer.startup(function(use)
 		"andymass/vim-matchup",
 		event = "BufRead",
 	}
+
+	use { "simrat39/symbols-outline.nvim", config = [[require"user.modules.symbols_outline".setup()]] }
 
 	use { "dstein64/vim-startuptime", cmd = "StartupTime" }
 
