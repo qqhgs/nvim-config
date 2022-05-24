@@ -7,14 +7,14 @@ local keys = {
 	normal_mode = {
 		a = { ":Alpha<CR>", "Alpha" },
 		c = "Close Buffer",
+		-- S = "Symbols Outline",
 		b = {
 			name = "Buffers",
 			c = { ":lua require('user.util').close_all_but_current()<CR>", "Close all but current" }, -- TODO: implement this for bufferline
-			d = { ":%bd!<CR>", "Close all" }, -- TODO: implement this for bufferline
+			d = { ":%bd!<CR>", "Force close all" }, -- TODO: implement this for bufferline
 			f = "Find",
-			h = { ":BufferLineCyclePrev<CR>", "Prev" },
-			l = { ":BufferLineCycleNext<CR>", "Next" },
 			p = "Pick",
+			P = "Pick to close",
 		},
 		g = {
 			name = "Git",
@@ -52,6 +52,7 @@ local keys = {
 			h = "Hover",
 			i = "Info",
 			r = "Rename",
+			R = "Restart",
 			q = "Loc list",
 		},
 		p = {
