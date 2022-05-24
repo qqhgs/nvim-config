@@ -107,4 +107,4 @@ util.keymap("n", "<Leader>c", function ()
 end)
 
 util.keymap("n", "<Leader>bp", ":BufferLinePick<CR>")
-util.keymap("n", "<Leader>bc", ":BufferLinePickClose<CR>")
+util.keymap("n", "<Leader>bP", ":BufferLinePickClose<CR>")
