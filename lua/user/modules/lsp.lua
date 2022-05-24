@@ -122,6 +122,8 @@ local lsp_settings = {
 		},
 		["html"] = {},
 		["cssls"] = {},
+		["tailwindcss"] = {},
+		["jsonls"] = {},
 		["tsserver"] = {},
 		["clangd"] = {},
 	},
