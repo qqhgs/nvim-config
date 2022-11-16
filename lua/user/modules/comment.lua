@@ -1,38 +1,7 @@
-local present, comments = pcall(require, "Comment")
-if not present then
-  return
-end
-
-local configs = {
-  padding = true,
+require("Comment").setup {
   ignore = "^$",
-  mappings = {
-    basic = true,
-    extra = false,
-  },
-  toggler = {
-    line = "gcc",
-    block = "gbc",
-  },
-  opleader = {
-    line = "gc",
-    block = "gb",
-  },
-  pre_hook = function(ctx)
-    local U = require "Comment.utils"
-
-    local location = nil
-    if ctx.ctype == U.ctype.block then
-      location = require("ts_context_commentstring.utils").get_cursor_location()
-    elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-      location = require("ts_context_commentstring.utils").get_visual_start_location()
-    end
-
-    return require("ts_context_commentstring.internal").calculate_commentstring {
-      key = ctx.ctype == U.ctype.line and "__default" or "__multiline",
-      location = location,
-    }
-  end,
+  pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 }
-
-comments.setup(configs)
+local api = require "Comment.api"
+vim.keymap.set("n", "<C-_>", api.call("toggle.linewise.current", "g@$"), { expr = true })
+vim.keymap.set("x", "<C-_>", api.call("toggle.linewise", "g@$"), { expr = true })
