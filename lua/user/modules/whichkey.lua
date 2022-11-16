@@ -130,3 +130,9 @@ whichkey.setup(configs)
 for key, value in pairs(keys) do
 	whichkey.register(value, opts[key])
 end
+
+local M = {}
+
+M.registers = function(mappings) require("which-key").register(mappings, { prefix = "<Leader>" }) end
+
+return M

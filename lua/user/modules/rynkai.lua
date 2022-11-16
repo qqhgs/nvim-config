@@ -1,29 +1,34 @@
-local present, rynkai = pcall(require, "rynkai")
-if not present then
-  return
-end
-
-local telescope_present, telescope = pcall(require, "telescope")
-if not telescope_present then
-  return
-end
-
-local config_file = vim.fn.stdpath "config" .. "/lua/user/modules/rynkai.lua"
-local rynkai_dir = vim.fn.stdpath "data" .. "/site/pack/packer/opt/rynkai.nvim/lua/rynkai/colors/"
-
-rynkai.setup {
-  theme = "ayu", -- this field is a must.
-  config_file = config_file,
-  rynkai_dir = rynkai_dir,
-}
-
-vim.cmd [[ colorscheme rynkai ]]
-
-telescope.load_extension "rynkai"
-vim.api.nvim_set_keymap("n", "<Leader>sc", ":Telescope rynkai<CR>", { noremap = true, silent = true })
-
-
 local M = {}
+
+local alias = "colorscheme"
+
+M.setup = function()
+  local rynkai = require "rynkai"
+
+  local config_file = vim.fn.stdpath "config" .. "/lua/user/modules/rynkai.lua"
+  local rynkai_dir = vim.fn.stdpath "data" .. "/site/pack/packer/opt/" .. alias .. "/lua/rynkai/colors/"
+
+  rynkai.setup {
+    theme = "mirage", -- NOTE: this field is a must.
+    config_file = config_file,
+    rynkai_dir = rynkai_dir,
+  }
+
+  vim.cmd [[ colorscheme rynkai ]]
+
+  local telescope_present, telescope = pcall(require, "telescope")
+  if not telescope_present then
+    return
+  end
+
+  telescope.load_extension "rynkai"
+
+  require("user.modules.whichkey").registers {
+    s = {
+      c = { "<cmd>Telescope rynkai<CR>", "Colorscheme" },
+    },
+  }
+end
 
 M.colorscheme_switcher = function(opts)
   local pickers, finders, action_state, conf, actions
@@ -45,7 +50,6 @@ M.colorscheme_switcher = function(opts)
       return color ~= before_color
     end, themes)
   )
-
 
   local picker = pickers.new(opts, {
     prompt_title = "Change color style",
@@ -79,6 +83,20 @@ M.colorscheme_switcher = function(opts)
   end
 
   picker:find()
+end
+
+function M.theme_config(theme_path)
+  if vim.fn.empty(vim.fn.glob(theme_path)) > 0 or theme_path == nil then
+    theme_path = "qqhgs/rynkai.nvim" -- github url
+  end
+  return {
+    theme_path,
+    event = "VimEnter",
+    as = alias,
+    config = function()
+      require("user.modules.rynkai").setup()
+    end,
+  }
 end
 
 return M

@@ -14,7 +14,7 @@ local configs = {
 		["<Leader>lc"] = ":lua vim.lsp.buf.references()<CR>",
 		["<Leader>ld"] = ":lua vim.lsp.buf.definition()<CR>",
 		["<Leader>le"] = ":lua vim.lsp.buf.declaration()<CR>",
-		["<Leader>lf"] = ":lua vim.lsp.buf.formatting()<CR>",
+		["<Leader>lf"] = ":lua vim.lsp.buf.format({ async = true })<CR>",
 		["<Leader>lF"] = ":LspToggleAutoFormat<CR>",
 		["<Leader>lh"] = ":lua vim.lsp.buf.hover()<CR>",
 		["<Leader>li"] = ":LspInfo<CR>",
@@ -54,7 +54,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 	border = "rounded",
 })
 local function highlight_document(client)
-	if client.resolved_capabilities.document_highlight then
+	if client.server_capabilities.document_highlight then
 		vim.api.nvim_exec(
 			[[
       augroup lsp_document_highlight
@@ -80,7 +80,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 local lsp_settings = {
 	on_attach = {
 		["tsserver"] = function(client)
-			client.resolved_capabilities.document_formatting = false
+			client.server_capabilities.document_formatting = false
 		end,
 	},
 	servers = {

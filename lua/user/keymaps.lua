@@ -1,3 +1,5 @@
+local M = {}
+
 local keymaps = {
   normal_mode = {
     -- Resize window with arrows
@@ -104,3 +106,18 @@ for mode, mapping in pairs(keymaps) do
     set_keymaps(mode, k, v)
   end
 end
+
+function M.set(mode, key, val)
+  local opt = generic_opts[mode] or generic_opts_any
+  if type(val) == "table" then
+    opt = val[2]
+    val = val[1]
+  end
+  if val then
+    vim.keymap.set(mode, key, val, opt)
+  else
+    pcall(vim.api.nvim_del_keymap, mode, key)
+  end
+end
+
+return M

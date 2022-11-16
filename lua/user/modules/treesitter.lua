@@ -1,48 +1,57 @@
-local present, treesitter = pcall(require, "nvim-treesitter.configs")
-if not present then
-  return
-end
+local status_ok, treesitter = pcall(require, "nvim-treesitter.configs")
+if not status_ok then return end
 
-local configs = {
+vim.opt.runtimepath:append(vim.fn.stdpath "data" .. "/site/parser/")
+
+treesitter.setup {
   ensure_installed = {
     "html",
     "css",
     "scss",
-    "c",
     "go",
     "json",
     "javascript",
-		"typescript",
-		"tsx",
+    "typescript",
+    "tsx",
     "svelte",
     "lua",
     "vim",
     "bash",
     "markdown",
   },
+  auto_install = true,
+  parser_install_dir = vim.fn.stdpath "data" .. "/site/parser/",
+  sync_install = false,
+  ignore_install = {},
   highlight = {
     enable = true,
-    use_languagetree = true,
-  },
-  autopairs = {
-    enable = true,
+    additional_vim_regex_highlighting = true,
   },
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
   },
-  indent = {
+  rainbow = {
+    enable = true,
+    disable = { "html" },
+    extended_mode = false,
+    max_file_lines = nil,
+  },
+  autopairs = { enable = true },
+  autotag = { enable = true },
+  incremental_selection = { enable = true },
+  indent = { enable = false },
+
+  -- vim-matchup
+  matchup = {
     enable = true,
   },
-  autotag = {
-    enable = true,
-  },
-	matchup = {
-		enable = true,
-	},
 }
 
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+require("user.modules.whichkey").registers {
+  T = {
+    name = "Treesitter",
+    i = { ":TSConfigInfo<cr>", "Info" },
+  },
+}
 
-treesitter.setup(configs)

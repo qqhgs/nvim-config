@@ -35,24 +35,25 @@ end
 
 util.keymap("n", "<Leader>ps", ":PackerSync<CR>")
 
+  local _, packer = pcall(require, "packer")
+  local _, packer_util = pcall(require, "packer.util")
+
 packer.init {
-	git = {
-		clone_timeout = 300,
-		subcommands = {
-			fetch = "fetch --no-tags --no-recurse-submodules --update-shallow --progress",
-		},
-	},
-	max_jobs = 50,
-	display = {
-		open_fn = function()
-			return require("packer.util").float { border = "rounded" }
-		end,
-	},
-	profile = {
-		enable = true,
-	},
-	auto_clean = true,
-	compile_on_sync = true,
+    display = {
+      open_fn = function() return packer_util.float { border = "rounded" } end,
+    },
+    profile = {
+      enable = true,
+      threshold = 0.0001,
+    },
+    git = {
+      clone_timeout = 300,
+      subcommands = {
+        update = "pull --rebase",
+      },
+    },
+    auto_clean = true,
+    compile_on_sync = true,
 	compile_path = vim.fn.stdpath "config" .. "/lua/user/compiled.lua",
 }
 
@@ -62,20 +63,12 @@ return packer.startup(function(use)
 	use "nvim-lua/plenary.nvim"
 	use "antoinemadec/FixCursorHold.nvim"
 
-	use {
-		-- "qqhgs/rynkai.nvim",
-		"~/project/nvim/rynkai.nvim",
-		event = "VimEnter",
-		config = function()
-			require "user.modules.rynkai"
-		end,
-	}
+  use(require("user.modules.rynkai").theme_config "~/workspaces/nvim/rynkai.nvim")
 
-	use { "kyazdani42/nvim-web-devicons", after = "rynkai.nvim" }
+	use { "kyazdani42/nvim-web-devicons", after = "colorscheme" }
 
 	use {
 		"akinsho/bufferline.nvim",
-		commit = "50e1bfe6f2c474c0a6e8171606b001f3b17ddeb2",
 		after = "nvim-web-devicons",
 		config = function()
 			require "user.modules.bufferline"
@@ -97,6 +90,10 @@ return packer.startup(function(use)
 		requires = {
 			"MunifTanjim/nui.nvim",
 		},
+    setup = function()
+      require("user.keymaps").set("n", "\\", "<cmd>Neotree reveal toggle<cr>")
+      require("user.keymaps").set("n", "<C-n>", "<cmd>Neotree reveal toggle<cr>")
+    end,
 		config = function()
 			require "user.modules.neotree"
 		end,
@@ -132,14 +129,11 @@ return packer.startup(function(use)
 	}
 	use {
 		"nvim-treesitter/nvim-treesitter",
-		event = { "BufRead", "BufNewFile" },
-		commit = "a189323454d1215c682c7ad7db3e6739d26339c4",
+    opt = true,
+    event = "BufReadPre",
 		config = function()
 			require "user.modules.treesitter"
 		end,
-		requires = {
-			"nathom/filetype.nvim",
-		},
 		run = ":TSUpdate",
 	}
 	use { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" }
@@ -149,7 +143,6 @@ return packer.startup(function(use)
 		"hrsh7th/nvim-cmp",
 		config = [[require"user.modules.cmp"]],
 		opt = true,
-		commit = "dd6e4d96f9e376c87302fa5414556aa6269bf997",
 		setup = [[require"user.util".defer"nvim-cmp"]],
 	}
 	use { "L3MON4D3/LuaSnip", after = "nvim-cmp", config = [[require"user.modules.luasnip"]] }
@@ -164,13 +157,6 @@ return packer.startup(function(use)
 	use { "neovim/nvim-lspconfig", after = "nvim-lsp-installer", config = [[require"user.modules.lsp"]] }
 	use { "jose-elias-alvarez/null-ls.nvim", config = [[require"user.modules.null_ls"]], after = "nvim-lspconfig" }
 	use { "ray-x/lsp_signature.nvim", config = [[require"user.modules.signature"]], after = "null-ls.nvim" }
-	use {
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		-- after = "lsp_signature.nvim",
-		config = function()
-			require("lsp_lines").register_lsp_virtual_lines()
-		end,
-	}
 
 	use {
 		"lewis6991/gitsigns.nvim",
@@ -198,7 +184,6 @@ return packer.startup(function(use)
 	}
 	use {
 		"akinsho/toggleterm.nvim",
-		commit = "e62008fe5879eaecb105eb81e393f87d4607164c",
 		opt = true,
 		setup = [[require"user.util".defer"toggleterm.nvim"]],
 		config = [[require"user.modules.toggleterm"]],
