@@ -33,10 +33,9 @@ if not status_ok then
   return
 end
 
-util.keymap("n", "<Leader>ps", ":PackerSync<CR>")
+vim.keymap.set("n", "<Leader>ps", ":PackerSync<CR>", {noremap = true, silent =true})
 
-local _, packer = pcall(require, "packer")
-local _, packer_util = pcall(require, "packer.util")
+local packer_util = require("packer.util")
 
 packer.init {
   display = {
@@ -58,6 +57,20 @@ packer.init {
   compile_on_sync = true,
   compile_path = vim.fn.stdpath "config" .. "/lua/user/compiled.lua",
 }
+
+  require("user.modules.whichkey").registers {
+    p = {
+      name = "Packer",
+      a = { ":PackerClean<CR>", "Clean" },
+      c = { ":PackerCompile<CR>", "Compile (Re)" },
+      i = { ":PackerInstall<CR>", "Install" },
+      u = { ":PackerUpdate<CR>", "Update" },
+      s = { ":PackerSync<CR>", "Sync" },
+      x = { ":lua require('maco.core.packer').snapshot()<CR>", "Snapshot" },
+      S = { ":PackerStatus<CR>", "Status" },
+      p = { ":PackerProfile<CR>", "Profile" },
+    },
+  }
 
 return packer.startup(function(use)
   use "wbthomason/packer.nvim"
