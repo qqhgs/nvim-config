@@ -6,13 +6,7 @@ local on_attach = function(client, bufnr)
 
   local navic_present, navic = pcall(require, "nvim-navic")
   if navic_present and client.server_capabilities.documentSymbolProvider then
-    navic.setup()
     navic.attach(client, bufnr)
-  end
-
-  local renamer_present, renamer = pcall(require, "renamer")
-  if renamer_present then
-    renamer.setup()
   end
 
   require("user.lsp.keymaps").setup(bufnr)

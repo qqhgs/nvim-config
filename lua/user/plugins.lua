@@ -215,18 +215,17 @@ return packer.startup(function(use)
       "jose-elias-alvarez/null-ls.nvim",
       {
         "SmiteshP/nvim-navic",
-        -- config = function()
-        --   require("nvim-navic").setup {}
-        -- end,
-        -- module = { "nvim-navic" },
+        config = function()
+          require("nvim-navic").setup {}
+        end,
+        module = { "nvim-navic" },
       },
 
-      -- renamer.nvim
       {
         "filipdutescu/renamer.nvim",
-        -- config = function()
-        --   require("renamer").setup()
-        -- end,
+        config = function()
+          require("renamer").setup()
+        end,
       },
     },
   }
