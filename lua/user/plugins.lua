@@ -1,10 +1,7 @@
-local util = require "user.util"
-local fn = vim.fn
-
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
+local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   print "Cloning packer.nvim..."
-  PACKER_BOOTSTRAP = fn.system {
+  PACKER_BOOTSTRAP = vim.fn.system {
     "git",
     "clone",
     "--depth",
@@ -33,9 +30,9 @@ if not status_ok then
   return
 end
 
-vim.keymap.set("n", "<Leader>ps", ":PackerSync<CR>", {noremap = true, silent =true})
+vim.keymap.set("n", "<Leader>ps", ":PackerSync<CR>", { noremap = true, silent = true })
 
-local packer_util = require("packer.util")
+local packer_util = require "packer.util"
 
 packer.init {
   display = {
@@ -58,19 +55,19 @@ packer.init {
   compile_path = vim.fn.stdpath "config" .. "/lua/user/compiled.lua",
 }
 
-  require("user.modules.whichkey").registers {
-    p = {
-      name = "Packer",
-      a = { ":PackerClean<CR>", "Clean" },
-      c = { ":PackerCompile<CR>", "Compile (Re)" },
-      i = { ":PackerInstall<CR>", "Install" },
-      u = { ":PackerUpdate<CR>", "Update" },
-      s = { ":PackerSync<CR>", "Sync" },
-      x = { ":lua require('maco.core.packer').snapshot()<CR>", "Snapshot" },
-      S = { ":PackerStatus<CR>", "Status" },
-      p = { ":PackerProfile<CR>", "Profile" },
-    },
-  }
+require("user.modules.whichkey").registers {
+  p = {
+    name = "Packer",
+    a = { ":PackerClean<CR>", "Clean" },
+    c = { ":PackerCompile<CR>", "Compile (Re)" },
+    i = { ":PackerInstall<CR>", "Install" },
+    u = { ":PackerUpdate<CR>", "Update" },
+    s = { ":PackerSync<CR>", "Sync" },
+    x = { ":lua require('maco.core.packer').snapshot()<CR>", "Snapshot" },
+    S = { ":PackerStatus<CR>", "Status" },
+    p = { ":PackerProfile<CR>", "Profile" },
+  },
+}
 
 return packer.startup(function(use)
   use "wbthomason/packer.nvim"
@@ -196,10 +193,43 @@ return packer.startup(function(use)
     },
   }
 
-  use { "williamboman/nvim-lsp-installer", opt = true, setup = [[require"user.util".defer"nvim-lsp-installer"]] }
-  use { "neovim/nvim-lspconfig", after = "nvim-lsp-installer", config = [[require"user.modules.lsp"]] }
-  use { "jose-elias-alvarez/null-ls.nvim", config = [[require"user.modules.null_ls"]], after = "nvim-lspconfig" }
-  use { "ray-x/lsp_signature.nvim", config = [[require"user.modules.signature"]], after = "null-ls.nvim" }
+  -- LSP
+  use {
+    "neovim/nvim-lspconfig",
+    opt = true,
+    event = { "BufReadPre" },
+    wants = {
+      "mason.nvim",
+      "mason-lspconfig.nvim",
+      "cmp-nvim-lsp",
+      "null-ls.nvim",
+      "nvim-navic",
+      "renamer.nvim",
+    },
+    config = function()
+      require "user.lsp"
+    end,
+    requires = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+      {
+        "SmiteshP/nvim-navic",
+        -- config = function()
+        --   require("nvim-navic").setup {}
+        -- end,
+        -- module = { "nvim-navic" },
+      },
+
+      -- renamer.nvim
+      {
+        "filipdutescu/renamer.nvim",
+        -- config = function()
+        --   require("renamer").setup()
+        -- end,
+      },
+    },
+  }
 
   use {
     "lewis6991/gitsigns.nvim",
@@ -239,7 +269,7 @@ return packer.startup(function(use)
     module = "persistence",
     wants = { "which-key.nvim" },
     config = function()
-      require("user.config.session")
+      require "user.config.session"
     end,
   }
   use { "norcalli/nvim-colorizer.lua", config = [[require"user.modules.colorizer"]], event = "BufRead" }
