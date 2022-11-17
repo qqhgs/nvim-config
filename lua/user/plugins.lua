@@ -292,6 +292,14 @@ return packer.startup(function(use)
     event = "BufRead",
   }
 
+  -- buffer
+  use {
+    "kazhala/close-buffers.nvim",
+    cmd = { "BDelete", "BWipeout" },
+    setup = function() require("user.config.closebuffer") end,
+  }
+
+
   use { "simrat39/symbols-outline.nvim", config = [[require"user.modules.symbols_outline".setup()]] }
 
   use {
