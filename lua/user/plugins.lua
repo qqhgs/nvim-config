@@ -1,20 +1,26 @@
-local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  print "Cloning packer.nvim..."
-  PACKER_BOOTSTRAP = vim.fn.system {
+local present, _ = pcall(require, "packer")
+
+if not present then
+  local packer_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+  -- delete the old packer install if one exists
+  vim.fn.delete(packer_path, "rf")
+  -- clone packer
+  print "Cloning Packer...\n"
+  vim.fn.system {
     "git",
     "clone",
     "--depth",
     "1",
     "https://github.com/wbthomason/packer.nvim",
-    install_path,
+    packer_path,
   }
-
-  local present, packer = pcall(require, "packer")
-  if present then
-    print "Packer cloned successfully."
-  else
-    error("Couldn't clone packer !\nPacker path: " .. install_path .. "\n" .. packer)
+  print "Initializing Packer...\n"
+  -- add packer and try loading it
+  vim.cmd.packadd "packer.nvim"
+  present, _ = pcall(require, "packer")
+  -- if packer didn't load, print error
+  if not present then
+    vim.api.nvim_err_writeln("Failed to load packer at:" .. packer_path)
   end
 end
 
@@ -157,6 +163,7 @@ return packer.startup(function(use)
     end,
   }
 
+	-- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
     opt = true,
@@ -215,17 +222,12 @@ return packer.startup(function(use)
       "jose-elias-alvarez/null-ls.nvim",
       {
         "SmiteshP/nvim-navic",
-        config = function()
-          require("nvim-navic").setup {}
-        end,
-        module = { "nvim-navic" },
+        config = [[require"user.config.navic"]],
       },
 
       {
         "filipdutescu/renamer.nvim",
-        config = function()
-          require("renamer").setup()
-        end,
+        config = [[require"user.config.renamer"]],
       },
     },
   }
@@ -272,7 +274,6 @@ return packer.startup(function(use)
     end,
   }
   use { "norcalli/nvim-colorizer.lua", config = [[require"user.modules.colorizer"]], event = "BufRead" }
-
   use {
     "AndrewRadev/splitjoin.vim",
     event = "BufRead",
@@ -296,9 +297,8 @@ return packer.startup(function(use)
   use {
     "kazhala/close-buffers.nvim",
     cmd = { "BDelete", "BWipeout" },
-    setup = function() require("user.config.closebuffer") end,
+    setup = [[require"user.config.closebuffer"]],
   }
-
 
   use { "simrat39/symbols-outline.nvim", config = [[require"user.modules.symbols_outline".setup()]] }
 
@@ -312,8 +312,4 @@ return packer.startup(function(use)
       -- vim.keymap.set("n", "<C-r>", "q<cmd>StartupTime<cr>", )
     end,
   }
-
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
 end)

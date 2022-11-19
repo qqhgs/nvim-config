@@ -1,4 +1,8 @@
-require("bufferline").setup {
+local present, bufferline = pcall(require, "bufferline")
+if not present then
+  return
+end
+bufferline.setup {
   options = {
     close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
     right_mouse_command = "vert sbuffer %d", -- can be a string | function, see "Mouse actions"
@@ -36,10 +40,9 @@ require("bufferline").setup {
 
 vim.keymap.set("n", "<Leader>bp", ":BufferLinePick<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>bP", ":BufferLinePickClose<CR>", { noremap = true, silent = true })
-require("user.modules.whichkey").registers({
-	b = {
-		p = { ":BufferlinePick<CR>", "Pick buffer"},
-		P = { ":BufferlinePick<CR>", "Pick buffer to close"}
-	}
-})
-
+require("user.modules.whichkey").registers {
+  b = {
+    p = { ":BufferlinePick<CR>", "Pick buffer" },
+    P = { ":BufferlinePick<CR>", "Pick buffer to close" },
+  },
+}

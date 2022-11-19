@@ -1,22 +1,31 @@
-local present, whichkey = pcall(require, "which-key")
-if not present then return end
+local M = {}
 
-local configs = {
-  window = { border = "rounded" },
-  ignore_missing = true,
-  layout = { spacing = 6 },
-  icons = {
-    separator = "->",
-  },
-}
+function M.setup()
+  local present, wk = pcall(require, "which-key")
+  if not present then
+    return
+  end
 
-vim.opt.timeoutlen = 100
+  local configs = {
+    window = { border = "rounded" },
+    ignore_missing = true,
+    layout = { spacing = 6 },
+    icons = {
+      separator = "->",
+    },
+  }
 
-whichkey.setup(configs)
+  vim.opt.timeoutlen = 100
 
+  wk.setup(configs)
+end
 
-local function registers(mappings) require("which-key").register(mappings, { prefix = "<Leader>" }) end
+function M.registers(mappings)
+  local present, wk = pcall(require, "which-key")
+  if not present then
+    return
+  end
+  wk.register(mappings, { prefix = "<Leader>" })
+end
 
-return {
-	registers = registers
-}
+return M

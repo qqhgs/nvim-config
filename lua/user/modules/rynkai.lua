@@ -3,7 +3,11 @@ local M = {}
 local alias = "colorscheme"
 
 M.setup = function()
-  local rynkai = require "rynkai"
+  -- local rynkai = require "rynkai"
+  local present, rynkai = pcall(require, "rynkai")
+  if not present then
+    return
+  end
 
   local config_file = vim.fn.stdpath "config" .. "/lua/user/modules/rynkai.lua"
   local rynkai_dir = vim.fn.stdpath "data" .. "/site/pack/packer/opt/" .. alias .. "/lua/rynkai/colors/"

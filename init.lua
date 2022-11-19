@@ -1,5 +1,5 @@
-local impatient_present, impatient = pcall(require, "impatient")
-if impatient_present then
+local present, impatient = pcall(require, "impatient")
+if present then
   impatient.enable_profile()
 end
 
@@ -10,11 +10,10 @@ local cores = {
   "plugins",
 }
 for _, core in ipairs(cores) do
-  require("user." .. core)
+  pcall(require, "user." .. core)
 end
 
-local compiled_present, _ = pcall(require, "user.compiled")
-if not compiled_present then
-	vim.cmd [[PackerCompile]]
-	-- print "compiled.lua not found. run 'PackerSync' or type <SPACE>ps"
+present, _ = pcall(require, "user.compiled")
+if not present then
+  vim.cmd [[PackerSync]]
 end
