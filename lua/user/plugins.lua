@@ -279,6 +279,10 @@ return packer.startup(function(use)
     event = "BufRead",
   }
 
+  -- better surround
+  use { "tpope/vim-surround", event = "BufReadPre" }
+  use { "Matt-A-Bennett/vim-surround-funk", event = "BufReadPre" }
+
   use {
     "phaazon/hop.nvim",
     event = "BufRead",
