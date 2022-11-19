@@ -240,7 +240,7 @@ return packer.startup(function(use)
   }
   use {
     "folke/which-key.nvim",
-    config = [[require"user.modules.whichkey"]],
+    config = [[require"user.modules.whichkey".setup()]],
   }
   use {
     "numToStr/Comment.nvim",
