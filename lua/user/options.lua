@@ -13,7 +13,6 @@ local default_options = {
   termguicolors = true,
   splitright = true,
   splitbelow = true,
-  fillchars = "eob: ",
   showtabline = 2,
   showbreak = "↳ ",
   fileencoding = "utf-8",
@@ -25,15 +24,27 @@ local default_options = {
   updatetime = 300,
   showmode = false,
   guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkon120",
+  laststatus = 3,
+	cmdheight = 0,
 }
 
--- vim.opt.shortmess:append "c"
+vim.opt.fillchars:append {
+  eob = " ",
+  horiz = "━",
+  horizup = "┻",
+  horizdown = "┳",
+  vert = "┃",
+  vertleft = "┨",
+  vertright = "┣",
+  verthoriz = "╋",
+}
 
 for k, v in pairs(default_options) do
   vim.opt[k] = v
 end
 
+-- vim.opt.shortmess:append "c"
+
 vim.cmd "set whichwrap+=<,>,[,],h,l"
+vim.cmd [[colorscheme habamax]]
 vim.cmd [[set iskeyword+=-]]
-vim.cmd([[hi Normal guibg=#1A1826]])
-vim.cmd([[hi NormalFloat guibg=#1F2430]])
