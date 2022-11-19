@@ -45,17 +45,16 @@ local keymaps = {
     ["<"] = "<gv",
     [">"] = ">gv",
 
-    -- Move line up/down
-    ["<A-j>"] = ":m .+1<CR>==",
-    ["<A-k>"] = ":m .-2<CR>==",
+    -- Move selected line / block of text
+    ["<A-k>"] = ":move '<-2<CR>gv-gv",
+    ["<A-j>"] = ":move '>+1<CR>gv-gv",
 
     -- don't yank when put on visual mode
     ["p"] = '"_dP',
   },
   visual_block_mode = {
-    -- Move current line / block with Alt-j/k like vscode.
-    ["<A-j>"] = ":m '>+1<CR>gv-gv",
-    ["<A-k>"] = ":m '<-2<CR>gv-gv",
+    ["<A-k>"] = ":move '<-2<CR>gv-gv",
+    ["<A-j>"] = ":move '>+1<CR>gv-gv",
   },
   command_mode = {
     -- Navigation
