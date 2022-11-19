@@ -2,53 +2,32 @@ local present, gitsigns = pcall(require, "gitsigns")
 if not present then
   return
 end
-local configs = {
+gitsigns.setup {
   signs = {
     add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
     change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
     delete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
     topdelete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-    changedelete = {
-      hl = "GitSignsChange",
-      text = "▎",
-      numhl = "GitSignsChangeNr",
-      linehl = "GitSignsChangeLn",
-    },
+    changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
   },
-  signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-  numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-  linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-  word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-  watch_gitdir = {
-    interval = 1000,
-    follow_files = true,
-  },
-  attach_to_untracked = true,
-  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-  current_line_blame_opts = {
-    virt_text = true,
-    virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-    delay = 1000,
-    ignore_whitespace = false,
-  },
-  current_line_blame_formatter_opts = {
-    relative_time = false,
-  },
-  sign_priority = 6,
-  update_debounce = 100,
-  status_formatter = nil, -- Use default
-  max_file_length = 40000,
-  preview_config = {
-    -- Options passed to nvim_open_win
-    border = "rounded",
-    style = "minimal",
-    relative = "cursor",
-    row = 0,
-    col = 1,
-  },
-  yadm = {
-    enable = false,
-  },
+  current_line_blame = true,
+  on_attach = function(bufnr)
+		local gs = package.loaded.gitsigns
+    require("user.modules.whichkey").registers {
+      g = {
+        name = "Git",
+        j = { gs.next_hunk, "Next Hunk" },
+        k = { gs.prev_hunk, "Prev Hunk" },
+        l = { gs.blame_line, "Blame" },
+        p = { gs.preview_hunk, "Preview Hunk" },
+        r = { gs.reset_hunk, "Reset Hunk" },
+        R = { gs.reset_buffer, "Reset Buffer" },
+        s = { gs.stage_hunk, "Stage Hunk" },
+        u = { gs.undo_stage_hunk, "Undo Stage Hunk" },
+        d = { ":Gitsigns diffthis HEAD<cr>", "Git Diff" },
+      }, {
+				buffer = bufnr
+			}
+    }
+  end,
 }
-
-gitsigns.setup(configs)
