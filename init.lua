@@ -8,6 +8,7 @@ local cores = {
   "options",
   "keymaps",
   "plugins",
+	"config.winbar"
 }
 for _, core in ipairs(cores) do
   pcall(require, "user." .. core)
