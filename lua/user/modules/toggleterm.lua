@@ -1,4 +1,7 @@
-local toggleterm = require "toggleterm"
+local toggleterm_present, toggleterm = pcall(require, "toggleterm")
+if not toggleterm_present then
+  return
+end
 
 toggleterm.setup {
   open_mapping = [[<C-t>]],
@@ -26,7 +29,9 @@ vim.cmd "autocmd! TermOpen term://* lua set_terminal_keymaps()"
 
 -- Create custom terminal
 local function custom_terminal(cmd)
-  if not cmd then return end
+  if not cmd then
+    return
+  end
   return require("toggleterm.terminal").Terminal:new {
     cmd = cmd,
     -- hidden = true,
@@ -34,5 +39,20 @@ local function custom_terminal(cmd)
   }
 end
 
-vim.keymap.set("n", "<F6>", function() custom_terminal("lazygit"):toggle() end) -- lazygit
-vim.keymap.set("n", "<F7>", function() custom_terminal("wuzz"):toggle() end) -- wuzz
+require("user.modules.whichkey").registers {
+  x = {
+    name = "Tool",
+    l = {
+      function()
+        custom_terminal("lazygit"):toggle()
+      end,
+      "Lazygit",
+    },
+    w = {
+      function()
+        custom_terminal("wuzz"):toggle()
+      end,
+      "Wuzz",
+    },
+  },
+}
