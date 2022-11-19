@@ -280,10 +280,6 @@ return packer.startup(function(use)
   }
 
   use {
-    "machakann/vim-sandwich",
-    event = "BufRead",
-  }
-  use {
     "phaazon/hop.nvim",
     event = "BufRead",
     config = [[require("user.modules.hop")]],
