@@ -19,7 +19,7 @@ treesitter.setup {
     "bash",
     "markdown",
   },
-  auto_install = true,
+  auto_install = false,
   parser_install_dir = vim.fn.stdpath "data" .. "/site/parser/",
   sync_install = false,
   ignore_install = {},
