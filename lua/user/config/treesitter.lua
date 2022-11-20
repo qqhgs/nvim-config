@@ -48,7 +48,7 @@ treesitter.setup {
   },
 }
 
-require("user.modules.whichkey").registers {
+require("user.config.whichkey").registers {
   T = {
     name = "Treesitter",
     i = { ":TSConfigInfo<cr>", "Info" },

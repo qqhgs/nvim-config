@@ -71,7 +71,7 @@ M.keymaps = function()
     { noremap = true, silent = true }
   )
 
-  require("user.modules.whichkey").registers {
+  require("user.config.whichkey").registers {
     e = { ":Telescope find_files<cr>", "File browser" },
     g = {
       o = { ":Telescope git_status<cr>", "Open changed file" },

@@ -39,7 +39,7 @@ local function custom_terminal(cmd)
   }
 end
 
-require("user.modules.whichkey").registers {
+require("user.config.whichkey").registers {
   x = {
     name = "Tool",
     l = {

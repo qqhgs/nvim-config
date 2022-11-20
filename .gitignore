@@ -1,4 +1,5 @@
 sessions/
+snapshots/
 compiled.lua
 user.lua
 

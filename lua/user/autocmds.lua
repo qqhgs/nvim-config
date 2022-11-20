@@ -14,18 +14,18 @@ local autocmd_groups = {
     { "FileType", "qf", "set nobuflisted" },
     { "VimLeavePre", "*", "set title set titleold=" },
     { "TermOpen", "*", "setlocal nonumber norelativenumber" },
-    { "VimEnter,BufEnter,BufLeave", "*", "lua require'user.util'.toggle_statusline()" },
+    { "VimEnter,CursorMoved,BufEnter,BufLeave", "*", "lua require'user.util'.toggle_statusline()" },
   },
 }
 
 for group_name, definition in pairs(autocmd_groups) do
   vim.cmd("augroup " .. group_name)
-  vim.cmd [[autocmd!]]
+  vim.cmd([[autocmd!]])
 
   for _, def in pairs(definition) do
-    local command = table.concat(vim.tbl_flatten { "autocmd", def }, " ")
+    local command = table.concat(vim.tbl_flatten({ "autocmd", def }), " ")
     vim.cmd(command)
   end
 
-  vim.cmd "augroup END"
+  vim.cmd("augroup END")
 end

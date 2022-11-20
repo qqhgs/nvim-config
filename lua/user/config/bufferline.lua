@@ -40,7 +40,7 @@ bufferline.setup {
 
 vim.keymap.set("n", "<Leader>bp", ":BufferLinePick<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>bP", ":BufferLinePickClose<CR>", { noremap = true, silent = true })
-require("user.modules.whichkey").registers {
+require("user.config.whichkey").registers {
   b = {
     p = { ":BufferlinePick<CR>", "Pick buffer" },
     P = { ":BufferlinePick<CR>", "Pick buffer to close" },

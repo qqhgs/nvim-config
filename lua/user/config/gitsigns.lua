@@ -13,7 +13,7 @@ gitsigns.setup {
   current_line_blame = true,
   on_attach = function(bufnr)
 		local gs = package.loaded.gitsigns
-    require("user.modules.whichkey").registers {
+    require("user.config.whichkey").registers {
       g = {
         name = "Git",
         j = { gs.next_hunk, "Next Hunk" },

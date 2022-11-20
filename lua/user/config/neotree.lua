@@ -1,7 +1,5 @@
-local util = require("user.util")
-
 -- Unless you are still migrating, remove the deprecated commands from v1.x
-vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
+vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 -- If you want icons for diagnostic errors, you'll need to define them somewhere:
 vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
@@ -12,10 +10,8 @@ vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSig
 -- in the form "LspDiagnosticsSignWarning"
 
 local neotree_present, neotree = pcall(require, "neo-tree")
-if not neotree_present then
-	return
-end
-neotree.setup {
+if not neotree_present then return end
+neotree.setup({
   close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
   popup_border_style = "rounded",
   enable_git_status = true,
@@ -65,10 +61,10 @@ neotree.setup {
     position = "left",
     width = 30,
     mappings = {
-        ["o"] = "open",
-        ["l"] = "open",
-				["h"] = "close_node",
-        ["v"] = "open_vsplit",
+      ["o"] = "open",
+      ["l"] = "open",
+      ["h"] = "close_node",
+      ["v"] = "open_vsplit",
     },
   },
   nesting_rules = {},
@@ -80,7 +76,7 @@ neotree.setup {
       hide_by_name = {
         ".DS_Store",
         "thumbs.db",
-        "node_modules"
+        "node_modules",
       },
       never_show = { -- remains hidden even if visible is toggled to true
         --".DS_Store",
@@ -119,6 +115,4 @@ neotree.setup {
       },
     },
   },
-}
-
-util.keymap("n", "\\", ":Neotree reveal toggle<CR>")
+})

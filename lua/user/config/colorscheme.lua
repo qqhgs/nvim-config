@@ -9,11 +9,11 @@ M.setup = function()
     return
   end
 
-  local config_file = vim.fn.stdpath "config" .. "/lua/user/modules/rynkai.lua"
+  local config_file = vim.fn.stdpath "config" .. "/lua/user/config/colorscheme.lua"
   local rynkai_dir = vim.fn.stdpath "data" .. "/site/pack/packer/opt/" .. alias .. "/lua/rynkai/colors/"
 
   rynkai.setup {
-    theme = "mirage", -- NOTE: this field is a must.
+    theme = "ayu", -- NOTE: this field is a must.
     config_file = config_file,
     rynkai_dir = rynkai_dir,
   }
@@ -27,7 +27,7 @@ M.setup = function()
 
   telescope.load_extension "rynkai"
 
-  require("user.modules.whichkey").registers {
+  require("user.config.whichkey").registers {
     s = {
       c = { "<cmd>Telescope rynkai<CR>", "Colorscheme" },
     },
@@ -98,7 +98,7 @@ function M.theme_config(theme_path)
     event = "VimEnter",
     as = alias,
     config = function()
-      require("user.modules.rynkai").setup()
+      require("user.config.colorscheme").setup()
     end,
   }
 end

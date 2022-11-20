@@ -1,4 +1,4 @@
-require("user.modules.whichkey").registers {
+require("user.config.whichkey").registers {
   c = { ":BDelete! this<CR>", "Close buffer" },
   b = {
     c = { ":BDelete! other<CR>", "Close other" },

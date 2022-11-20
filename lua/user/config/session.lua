@@ -5,7 +5,7 @@ end
 
 persistence.setup()
 
-require("user.modules.whichkey").registers {
+require("user.config.whichkey").registers {
   S = {
     name = "Session",
     s = { ":lua require('persistence').load()<CR>", "Load last by dir" },
