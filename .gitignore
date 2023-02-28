@@ -2,6 +2,8 @@ sessions/
 snapshots/
 compiled.lua
 user.lua
+.luarc.json
+lazy-lock.json
 
 *.old
 *.bak
