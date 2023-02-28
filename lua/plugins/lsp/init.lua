@@ -7,6 +7,7 @@ return {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
+      "ray-x/lsp_signature.nvim",
     },
     ---@class PluginLspOpts
     opts = {
@@ -20,7 +21,7 @@ return {
       -- Automatically format on save
       autoformat = true,
       -- options for vim.lsp.buf.format
-      -- `bufnr` and `filter` is handled by the LazyVim formatter,
+      -- `bufnr` and `filter` is handled by the formatter,
       -- but can be also overridden when specified
       format = {
         formatting_options = nil,
@@ -65,6 +66,7 @@ return {
       require("util").on_attach(function(client, buffer)
         require("plugins.lsp.format").on_attach(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
+        require("lsp_signature").on_attach(_, buffer)
       end)
 
       -- diagnostics
@@ -150,7 +152,7 @@ return {
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
-    config = function(plugin, opts)
+    config = function(_, opts)
       require("mason").setup(opts)
       local mr = require("mason-registry")
       for _, tool in ipairs(opts.ensure_installed) do
