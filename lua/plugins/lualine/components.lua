@@ -21,7 +21,7 @@ return {
   location = function()
     local line = vim.fn.line(".")
     local col = vim.fn.virtcol(".")
-    return string.format("Ln%3d,Col %-2d", line, col)
+    return string.format("%d,%d", line, col)
   end,
   branch = {
     "b:gitsigns_head",
