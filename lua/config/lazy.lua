@@ -20,7 +20,16 @@ require("lazy").setup({
   checker = { enabled = true, notify = false },
   change_detection = {
     notify = false,
+
+  ui = {
+    icons = {
+      ft = "",
+      lazy = "鈴 ",
+      loaded = "",
+      not_loaded = "",
+    },
   },
+
   performance = {
     rtp = {
       disabled_plugins = {
