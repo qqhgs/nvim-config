@@ -22,7 +22,7 @@ return {
         { "p", "冷 Find project", ":Telescope projects <CR>" },
         { "r", "  Recent files", ":Telescope oldfiles <CR>" },
         { "g", "  Live grep", ":Telescope live_grep <CR>" },
-        { "l", "  Last Session", ":lua require('persistence').load({ last = true })<CR>" },
+        { "l", "  Restore Session", ":lua require('persistence').load()<CR>" },
         { "c", "  Colorscheme  ", ":lua require'user.config.rynkai'.colorscheme_switcher()<CR>" },
         { "s", "  Settings", ":e " .. config_file .. "<CR>" },
         { "q", "  Quit", ":qa<CR>" },
