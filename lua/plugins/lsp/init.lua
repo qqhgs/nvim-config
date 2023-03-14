@@ -1,5 +1,4 @@
 return {
-  -- lspconfig
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -28,26 +27,22 @@ return {
         timeout_ms = nil,
       },
       -- LSP Server Settings
-      ---@type lspconfig.options
       servers = {
-        jsonls = {},
-        lua_ls = {
-          -- mason = false, -- set to false if you don't want this server to be installed with mason
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-            },
-          },
-        },
+        -- jsonls = {},
+        -- lua_ls = {
+        --   -- mason = false, -- set to false if you don't want this server to be installed with mason
+        --   settings = {
+        --     Lua = {
+        --       workspace = {
+        --         checkThirdParty = false,
+        --       },
+        --       completion = {
+        --         callSnippet = "Replace",
+        --       },
+        --     },
+        --   },
+        -- },
       },
-      -- you can do any additional lsp server setup here
-      -- return true if you don't want this server to be setup with lspconfig
-      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
       setup = {
         -- example to setup with typescript.nvim
         -- tsserver = function(_, opts)
@@ -67,6 +62,9 @@ return {
         require("plugins.lsp.format").on_attach(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
         require("lsp_signature").on_attach(_, buffer)
+
+        -- disable semantic token
+        -- client.server_capabilities.semanticTokensProvider = nil
       end)
 
       -- diagnostics
@@ -123,23 +121,28 @@ return {
 
   -- formatters
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "jay-babu/mason-null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "mason.nvim" },
-    opts = function()
+    -- enabled = false,
+    dependencies = { "mason.nvim", "jose-elias-alvarez/null-ls.nvim" },
+    config = function()
       local nls = require("null-ls")
-      return {
-        sources = {
-          nls.builtins.formatting.prettierd,
-          nls.builtins.formatting.stylua,
-        },
-      }
+      local mnls = require("mason-null-ls")
+
+      mnls.setup({
+        automatic_setup = true,
+      })
+
+      mnls.setup_handlers({
+        function(sources_name, methods) require("mason-null-ls.automatic_setup")(sources_name, methods) end,
+      })
+
+      nls.setup()
     end,
   },
 
   -- cmdline tools and lsp servers
   {
-
     "williamboman/mason.nvim",
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
@@ -148,7 +151,6 @@ return {
         "stylua",
         "shellcheck",
         "shfmt",
-        "flake8",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
