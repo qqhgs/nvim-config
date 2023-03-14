@@ -12,7 +12,7 @@ return {
         {
           filetype = "NvimTree",
           text = "",
-          highlight = "Directory",
+          highlight = "NvimTreeNormal",
           text_align = "left",
         },
       },
