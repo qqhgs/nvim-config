@@ -1,22 +1,14 @@
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
-  opts = function(plugin)
-    local function fg(name)
-      return function()
-        ---@type {foreground?:number}?
-        local hl = vim.api.nvim_get_hl_by_name(name, true)
-        return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
-      end
-    end
-
+  opts = function()
     local components = require("plugins.lualine.components")
 
     return {
       options = {
         theme = "auto",
         globalstatus = true,
-        disabled_filetypes = { statusline = { "lazy", "alpha" }, winbar = { "NvimTree", "alpha", "toggleterm" } },
+        disabled_filetypes = { statusline = { "lazy", "alpha" } },
         component_separators = "",
         section_separators = "",
       },
@@ -45,21 +37,6 @@ return {
         lualine_z = {
           -- { "encoding" },
         },
-      },
-      winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {
-          components.modicon,
-          components.breadcrumb,
-          components.navic,
-        },
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
-      },
-      inactive_winbar = {
-        lualine_c = { components.breadcrumb },
       },
       extensions = { "nvim-tree", "toggleterm", "symbols-outline", "quickfix" },
     }
