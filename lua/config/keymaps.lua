@@ -120,6 +120,7 @@ map("n", "<leader>bw", function() require("util.buffer").kill_buffer("bw") end, 
 map("n", "<leader>tf", require("plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
 map("n", "<leader>ts", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
 map("n", "<leader>tw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
+map("n", "<leader>tn", function() Util.toggle("number") end, { desc = "Toggle Number" })
 map("n", "<leader>td", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 map(
