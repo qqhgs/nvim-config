@@ -2,6 +2,7 @@ return {
   "akinsho/toggleterm.nvim",
   opts = {
     open_mapping = [[<C-t>]],
+    insert_mapping = false,
     -- direction = "float",
     highlights = {
       Normal = { link = "Normal" },
@@ -30,7 +31,7 @@ return {
       end
     end
     return {
-      "<C-t>",
+      { "<C-t>", mode = "n" },
       { "<leader>te", require("util.fm").Ranger, desc = "File explorer" },
       { "<leader>tl", float_term("lazygit"), desc = "Lazygit" },
     }
