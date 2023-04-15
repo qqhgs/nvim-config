@@ -25,7 +25,6 @@ local default_options = {
   -- shell = "/usr/bin/bash",
   shiftwidth = 0,
   showbreak = "↳ ",
-  splitkeep = "topline",
   synmaxcol = 120,
   showmatch = true,
   showmode = false,
