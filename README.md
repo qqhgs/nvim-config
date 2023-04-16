@@ -1,8 +1,8 @@
 <h1 align="center">rynvim (/'re-wind-vim'/) WIP</h1>
 
 <div align="center">
-<img src="./assets/intro.png" alt="ryn"/>
-<img src="./assets/default.png" alt="ryn"/>
+<img src="./assets/intro_1.png" alt="ryn"/>
+<img src="./assets/default_1.png" alt="ryn"/>
 <a href="https://github.com/neovim/neovim">
 <img src="https://img.shields.io/badge/Neovim-0.9-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=white" alt="Neovim minimum version"/>
 </a>
