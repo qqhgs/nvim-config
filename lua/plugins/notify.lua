@@ -1,6 +1,6 @@
 return {
   "rcarriga/nvim-notify",
-  -- lazy = false,
+  event = "VeryLazy",
   keys = {
     {
       "<leader>un",
@@ -13,5 +13,9 @@ return {
     max_height = function() return math.floor(vim.o.lines * 0.75) end,
     max_width = function() return math.floor(vim.o.columns * 0.75) end,
   },
-  init = function() vim.notify = require("notify") end,
+  config = function(_, opts)
+    local notify = require("notify")
+    notify.setup(opts)
+    vim.notify = notify
+  end,
 }
