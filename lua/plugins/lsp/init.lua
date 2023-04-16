@@ -12,10 +12,17 @@ return {
     opts = {
       -- options for vim.diagnostic.config()
       diagnostics = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = { spacing = 4, prefix = "●" },
+        -- virtual_text = { spacing = 4, prefix = "●" },
+        virtual_text = false,
         severity_sort = true,
+        float = {
+          focused = false,
+          style = "minimal",
+          border = "rounded",
+          source = "always",
+          header = "",
+          prefix = "",
+        },
       },
       -- Automatically format on save
       autoformat = true,
@@ -58,17 +65,25 @@ return {
       -- setup autoformat
       require("plugins.lsp.format").autoformat = opts.autoformat
       -- setup formatting and keymaps
-      require("util").on_attach(function(client, buffer)
-        require("plugins.lsp.format").on_attach(client, buffer)
-        require("plugins.lsp.keymaps").on_attach(client, buffer)
-        require("lsp_signature").on_attach(_, buffer)
+      require("util").on_attach(function(client, bufnr)
+        require("plugins.lsp.format").on_attach(client, bufnr)
+        require("plugins.lsp.keymaps").on_attach(client, bufnr)
+        require("lsp_signature").on_attach(_, bufnr)
+
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
 
         -- disable semantic token
         -- client.server_capabilities.semanticTokensProvider = nil
       end)
 
       -- diagnostics
-      for name, icon in pairs(require("const.icons").diagnostics) do
+      for name, icon in pairs({
+        Error = " ",
+        Warn = " ",
+        Hint = " ",
+        Info = " ",
+      }) do
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
@@ -83,9 +98,13 @@ return {
         }, servers[server] or {})
 
         if opts.setup[server] then
-          if opts.setup[server](server, server_opts) then return end
+          if opts.setup[server](server, server_opts) then
+            return
+          end
         elseif opts.setup["*"] then
-          if opts.setup["*"](server, server_opts) then return end
+          if opts.setup["*"](server, server_opts) then
+            return
+          end
         end
         require("lspconfig")[server].setup(server_opts)
       end
@@ -126,18 +145,10 @@ return {
     -- enabled = false,
     dependencies = { "mason.nvim", "jose-elias-alvarez/null-ls.nvim" },
     config = function()
-      local nls = require("null-ls")
-      local mnls = require("mason-null-ls")
-
-      mnls.setup({
-        automatic_setup = true,
+      require("null-ls").setup()
+      require("mason-null-ls").setup({
+        handlers = {},
       })
-
-      mnls.setup_handlers({
-        function(sources_name, methods) require("mason-null-ls.automatic_setup")(sources_name, methods) end,
-      })
-
-      nls.setup()
     end,
   },
 
@@ -153,13 +164,14 @@ return {
         "shfmt",
       },
     },
-    ---@param opts MasonSettings | {ensure_installed: string[]}
     config = function(_, opts)
       require("mason").setup(opts)
       local mr = require("mason-registry")
       for _, tool in ipairs(opts.ensure_installed) do
         local p = mr.get_package(tool)
-        if not p:is_installed() then p:install() end
+        if not p:is_installed() then
+          p:install()
+        end
       end
     end,
   },
