@@ -5,50 +5,44 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        init = function()
-          -- PERF: no need to load the plugin, if we only need its queries for mini.ai
-          local plugin = require("lazy.core.config").spec.plugins["nvim-treesitter"]
-          local opts = require("lazy.core.plugin").values(plugin, "opts", false)
-          local enabled = false
-          if opts.textobjects then
-            for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-              if opts.textobjects[mod] and opts.textobjects[mod].enable then
-                enabled = true
-                break
-              end
-            end
-          end
-          if not enabled then require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects") end
-        end,
-      },
+      "windwp/nvim-ts-autotag",
     },
     keys = {
       { "<c-space>", desc = "Increment selection" },
       { "<bs>", desc = "Schrink selection", mode = "x" },
     },
-    ---@type TSConfig
     opts = {
-      highlight = { enable = true },
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+        disable = function(_, buf)
+          local max_filesize = 100 * 1024 -- 100 KB
+          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+          if ok and stats and stats.size > max_filesize then return true end
+        end,
+      },
       indent = { enable = true },
+      autotag = {
+        enable = true,
+      },
+      textobjects = {
+        swap = {
+          enable = false,
+          -- swap_next = textobj_swap_keymaps,
+        },
+        -- move = textobj_move_keymaps,
+        select = {
+          enable = false,
+          -- keymaps = textobj_sel_keymaps,
+        },
+      },
+      textsubjects = {
+        enable = true,
+        keymaps = { ["."] = "textsubjects-smart", [";"] = "textsubjects-big" },
+      },
       context_commentstring = { enable = true, enable_autocmd = false },
       ensure_installed = {
-        "bash",
-        "help",
-        "html",
-        "javascript",
-        "json",
         "lua",
-        "markdown",
-        "markdown_inline",
-        "query",
-        "regex",
-        "tsx",
-        "typescript",
-        "vim",
-        "yaml",
-        "go",
       },
       incremental_selection = {
         enable = true,
@@ -60,7 +54,8 @@ return {
         },
       },
     },
-    ---@param opts TSConfig
-    config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end,
   },
 }
