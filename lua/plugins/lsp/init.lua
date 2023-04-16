@@ -70,9 +70,6 @@ return {
         require("plugins.lsp.keymaps").on_attach(client, bufnr)
         require("lsp_signature").on_attach(_, bufnr)
 
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-
         -- disable semantic token
         -- client.server_capabilities.semanticTokensProvider = nil
       end)
