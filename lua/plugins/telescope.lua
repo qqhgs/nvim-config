@@ -6,12 +6,12 @@ end
 
 return {
   "nvim-telescope/telescope.nvim",
-  cmd = "Telescope",
+  event = "VeryLazy",
   dependencies = {
-    -- "nvim-telescope/telescope-file-browser.nvim",
-    -- "nvim-telescope/telescope-fzy-native.nvim",
-    -- "nvim-telescope/telescope-z.nvim",
+    "nvim-telescope/telescope-fzy-native.nvim",
     "nvim-telescope/telescope-project.nvim",
+    "nvim-telescope/telescope-ui-select.nvim",
+    "nvim-telescope/telescope-symbols.nvim",
   },
   keys = {
     { "<C-p>", "<cmd>Telescope find_files previewer=false theme=dropdown<cr>", desc = "Find files" },
@@ -37,6 +37,7 @@ return {
     { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
     { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+    { "<leader>sp", "<cmd>Telescope project<cr>", desc = "Project" },
     { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
   },
   opts = {
@@ -60,7 +61,7 @@ return {
       buffers = {
         -- theme = "dropdown",
         -- previewer = false,
-        initial_mode = "normal",
+        -- initial_mode = "normal",
         mappings = {
           i = {
             ["<C-d>"] = actions("delete_buffer"),
@@ -74,4 +75,8 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    require("telescope").setup(opts)
+    require("telescope").load_extension("project")
+  end,
 }
