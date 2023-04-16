@@ -1,30 +1,22 @@
-local path = "~/workspaces/nvim/mayu.nvim"
 return {
-
   {
-    dir = "~/workspaces/nvim/mayu.nvim",
-    lazy = false,
+    "catppuccin/nvim",
+    name = "catppuccin",
+    event = "VimEnter",
     config = function()
-      require("mayu").setup({
-        theme = "mirage",
-        config_file = vim.fn.stdpath("config") .. "/lua/plugins/colorscheme.lua",
-        mayu_dir = path .. "/lua/mayu/colors",
+      require("catppuccin").setup({
+        custom_highlights = function()
+          return {
+            ["PmenuSel"] = { bg = "NONE" },
+            ["DiagnosticUnderlineError"] = { undercurl = true },
+            ["DiagnosticUnderlineWarn"] = { undercurl = true },
+            ["DiagnosticUnderlineHint"] = { undercurl = true },
+            ["DiagnosticUnderlineInfo"] = { undercurl = true },
+            ["DiagnosticUnderlineOk"] = { undercurl = true },
+          }
+        end,
       })
-
-      vim.cmd("colorscheme mayu")
-
-      require("telescope").load_extension("mayu")
-
-      vim.keymap.set("n", "<leader>sc", "<cmd>Telescope mayu<cr>", { desc = "Change themes" })
+      vim.cmd.colorscheme("catppuccin")
     end,
-  },
-  {
-    "rebelot/kanagawa.nvim",
-    lazy = false,
-  },
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    -- config = function() require("tokyonight").load() end,
   },
 }
