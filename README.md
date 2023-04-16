@@ -18,6 +18,5 @@
 - Optional Requirements:
   - [ripgrep](https://github.com/BurntSushi/ripgrep) - live grep telescope search (`<leader>sg`)
   - [lazygit](https://github.com/jesseduffield/lazygit) - git ui toggle terminal (`<leader>tl`)
-  - [ranger](https://github.com/ranger/ranger) - File manager terminal (`<leader>te`)
 
 > Note when using default theme: For MacOS, the default terminal does not have true color support. You will need to use [iTerm2](https://iterm2.com/) or another [terminal emulator](https://gist.github.com/XVilka/8346728#terminal-emulators) that has true color support.
