@@ -1,3 +1,5 @@
+local icons = require("const.icons")
+
 return {
 
   { "folke/lazy.nvim", lazy = false },
@@ -5,28 +7,27 @@ return {
   "nvim-lua/plenary.nvim",
   "nvim-tree/nvim-web-devicons",
 
-  -- {
-  --   dir = "~/workspaces/nvim/mayu.nvim",
-  --   lazy = false,
-  --   config = function() require("mayu").setup() end,
-  -- },
-
   {
     "folke/which-key.nvim",
-    lazy = false,
+    event = "VeryLazy",
     config = function()
       vim.opt.timeoutlen = 100
       local wk = require("which-key")
-      wk.setup()
+      wk.setup({
+        icons = { group = vim.g.icons_enabled and "" or "+" },
+        disable = { filetypes = { "TelescopePrompt" } },
+      })
 
       local keymaps = {
         mode = { "n", "v" },
         ["<leader>b"] = { name = "Buffer" },
-        ["<leader>c"] = { name = "Code" },
-        ["<leader>g"] = { name = "Git" },
-        ["<leader>gh"] = { name = "Hunks" },
+        -- ["<leader>c"] = { name = "Code" },
+        ["<leader>c"] = { name = icons.ui.Gear .. " LSP" },
+        ["<leader>g"] = { name = icons.git.Git .. " Git" },
+        ["<leader>gh"] = { desc = "Hunks" },
         ["<leader>q"] = { name = "Session" },
         ["<leader>s"] = { name = "Search" },
+        ["<leader>i"] = { desc = "Tab" },
         ["<leader>t"] = { name = "Tools" },
         ["<leader>u"] = { name = "UI" },
         ["<leader>x"] = { name = "Diagnostics/quickfix" },
@@ -38,9 +39,8 @@ return {
   -- session management
   {
     "folke/persistence.nvim",
-    event = "BufReadPre",
+    event = "VeryLazy",
     opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" } },
-    -- stylua: ignore
     keys = {
       { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
       { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
