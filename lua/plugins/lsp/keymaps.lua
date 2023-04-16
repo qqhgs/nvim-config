@@ -7,9 +7,8 @@ M._keys = nil
 function M.get()
   local format = require("plugins.lsp.format").format
   if not M._keys then
-  ---@class PluginLspKeys
-    -- stylua: ignore
-    M._keys =  {
+    ---@class PluginLspKeys
+    M._keys = {
       { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
       { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
       { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto Definition" },
@@ -29,6 +28,7 @@ function M.get()
       { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
       { "<leader>cf", format, desc = "Format Document", has = "documentFormatting" },
       { "<leader>cf", format, desc = "Format Range", mode = "v", has = "documentRangeFormatting" },
+      { "<leader>co", "<cmd>LspRestart<cr>", desc = "Restart LSP" },
     }
     local present, _ = pcall(require, "inc-rename.nvim")
     if present then
