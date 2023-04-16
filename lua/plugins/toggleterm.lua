@@ -32,7 +32,6 @@ return {
     end
     return {
       { "<C-t>", mode = "n" },
-      { "<leader>te", require("util.fm").Ranger, desc = "File explorer" },
       { "<leader>tl", float_term("lazygit"), desc = "Lazygit" },
     }
   end,
