@@ -23,8 +23,8 @@ return {
         { "r", "  Recent files", ":Telescope oldfiles <CR>" },
         { "g", "  Live grep", ":Telescope live_grep <CR>" },
         { "l", "  Restore Session", ":lua require('persistence').load()<CR>" },
-        { "c", "  Colorscheme  ", ":lua require'user.config.rynkai'.colorscheme_switcher()<CR>" },
-        { "s", "  Settings", ":e " .. config_file .. "<CR>" },
+        -- { "c", "  Colorscheme  ", ":lua require'user.config.rynkai'.colorscheme_switcher()<CR>" },
+        -- { "s", "  Settings", ":e " .. config_file .. "<CR>" },
         { "q", "  Quit", ":qa<CR>" },
       },
     }
@@ -41,5 +41,18 @@ return {
     dashboard.config.opts.noautocmd = true
 
     return dashboard.config
+  end,
+  config = function(_, opts)
+    local dashboard = require("alpha.themes.dashboard")
+    require("alpha").setup(opts)
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "LazyVimStarted",
+      callback = function()
+        local stats = require("lazy").stats()
+        local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+        dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+        pcall(vim.cmd.AlphaRedraw)
+      end,
+    })
   end,
 }
