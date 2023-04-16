@@ -6,5 +6,6 @@ return {
   },
   opts = {
     width = 30,
+    autofold_depth = 1,
   },
 }
