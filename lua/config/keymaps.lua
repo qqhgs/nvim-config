@@ -108,8 +108,6 @@ map("n", "<C-S>", "<Cmd>silent! update | redraw<CR>", { desc = "Save" })
 map({ "i", "x" }, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>", { desc = "Save and go to Normal mode" })
 
 -- buffers
-map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 map("n", "<leader>bd", "<cmd>BufferKill<cr>", { desc = "Close" })
 map("n", "<leader>bD", "<cmd>bd!<cr>", { desc = "Close (!)" })
 map("n", "<leader>bx", "<cmd>%bd<cr>", { desc = "Close all" })
@@ -117,8 +115,9 @@ map("n", "<leader>bc", "<cmd>lua require('util.buffer').other()<cr>", { desc = "
 map("n", "<leader>bw", function() require("util.buffer").kill_buffer("bw") end, { desc = "Wipeout" })
 
 -- toggle options
-map("n", "<leader>tf", require("plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
+map("n", "<leader>tf", function() require("plugins.lsp.format").toggle() end, { desc = "Toggle format on Save" })
 map("n", "<leader>ts", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
+map("n", "<leader>tr", function() Util.toggle("cursorline") end, { desc = "Toggle Cursorline" })
 map("n", "<leader>tw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
 map("n", "<leader>tn", function() Util.toggle("number") end, { desc = "Toggle Number" })
 map("n", "<leader>td", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
@@ -131,9 +130,9 @@ map(
 )
 
 -- tabs
-map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
-map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
-map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader>il", "<cmd>tablast<cr>", { desc = "Last Tab" })
+map("n", "<leader>if", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<leader>in", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<leader>i]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<leader>id", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+map("n", "<leader>i[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
