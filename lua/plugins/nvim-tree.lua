@@ -1,6 +1,6 @@
 return {
   "nvim-tree/nvim-tree.lua",
-  cmd = { "NvimTreeToggle" },
+  event = "VeryLazy",
   opts = function()
     return {
       view = {
@@ -19,7 +19,7 @@ return {
       },
       update_focused_file = {
         enable = true,
-        update_root = true,
+        update_root = false,
       },
       git = {
         ignore = false,
@@ -32,6 +32,6 @@ return {
   end,
   keys = {
     { "<C-n>", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
-    { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
+    -- { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
   },
 }
