@@ -6,6 +6,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "windwp/nvim-ts-autotag",
+      "andymass/vim-matchup",
     },
     keys = {
       { "<c-space>", desc = "Increment selection" },
@@ -18,7 +19,9 @@ return {
         disable = function(_, buf)
           local max_filesize = 100 * 1024 -- 100 KB
           local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-          if ok and stats and stats.size > max_filesize then return true end
+          if ok and stats and stats.size > max_filesize then
+            return true
+          end
         end,
       },
       indent = { enable = true },
@@ -35,6 +38,9 @@ return {
           enable = false,
           -- keymaps = textobj_sel_keymaps,
         },
+      },
+      matchup = {
+        enable = true,
       },
       textsubjects = {
         enable = true,
@@ -55,6 +61,7 @@ return {
       },
     },
     config = function(_, opts)
+      vim.g.matchup_matchparen_offscreen = { method = "status_manual" }
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
