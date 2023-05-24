@@ -11,7 +11,9 @@ return {
   opts = function()
     local cmp = require("cmp")
     local snip_status_ok, luasnip = pcall(require, "luasnip")
-    if not snip_status_ok then return end
+    if not snip_status_ok then
+      return
+    end
 
     local function has_words_before()
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -30,7 +32,9 @@ return {
         scrollbar = false,
       },
       snippet = {
-        expand = function(args) luasnip.lsp_expand(args.body) end,
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
       },
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
@@ -99,12 +103,15 @@ return {
         fields = { "kind", "abbr", "menu" },
       },
       sources = cmp.config.sources({
+        { name = "codeium", priority = 1250 },
         { name = "nvim_lsp", priority = 1000 },
         { name = "luasnip", priority = 750 },
         {
           name = "buffer",
           option = {
-            get_bufnrs = function() return vim.api.nvim_list_bufs() end,
+            get_bufnrs = function()
+              return vim.api.nvim_list_bufs()
+            end,
           },
           priority = 500,
         },
