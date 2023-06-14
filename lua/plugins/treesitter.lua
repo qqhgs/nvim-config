@@ -7,6 +7,7 @@ return {
     dependencies = {
       "windwp/nvim-ts-autotag",
       "andymass/vim-matchup",
+      "nvim-treesitter/nvim-treesitter-textobjects",
     },
     keys = {
       { "<c-space>", desc = "Increment selection" },
