@@ -32,6 +32,7 @@ M.DefaultStatusline = {
 }
 
 M.DefaultWinbar = {
+  components.Space,
   components.Breadcrumbs,
   components.Align,
   components.SearchCount,
