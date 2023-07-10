@@ -1,7 +1,9 @@
 ---@param actions string
 ---@return function
 local actions = function(actions)
-  return function(...) require("telescope.actions")[actions](...) end
+  return function(...)
+    require("telescope.actions")[actions](...)
+  end
 end
 
 return {
@@ -42,6 +44,7 @@ return {
   },
   opts = {
     defaults = {
+      file_ignore_patterns = { "^vendor/" },
       prompt_prefix = " ",
       selection_caret = " ",
       mappings = {
