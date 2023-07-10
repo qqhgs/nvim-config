@@ -2,7 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     version = false, -- last release is way too old and doesn't work on Windows
-    build = ":TSUpdate",
+    -- build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "windwp/nvim-ts-autotag",
@@ -50,6 +50,7 @@ return {
       context_commentstring = { enable = true, enable_autocmd = false },
       ensure_installed = {
         "lua",
+        "http",
       },
       incremental_selection = {
         enable = true,
