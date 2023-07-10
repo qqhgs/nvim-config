@@ -37,8 +37,10 @@ return {
       on_attach = on_attach,
     }
   end,
+  configi = function(_, opts)
+    require("nvim-tree").setup(opts)
+  end,
   keys = {
-    { "<C-n>", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
-    -- { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
+    { "<C-n>", "<cmd>NvimTreeFindFileToggle!<cr>", desc = "Explorer" },
   },
 }
