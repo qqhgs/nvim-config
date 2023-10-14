@@ -117,9 +117,10 @@ map("n", "<leader>bw", function() require("util.buffer").kill_buffer("bw") end, 
 -- toggle options
 map("n", "<leader>tf", function() require("plugins.lsp.format").toggle() end, { desc = "Toggle format on Save" })
 map("n", "<leader>ts", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
-map("n", "<leader>tr", function() Util.toggle("cursorline") end, { desc = "Toggle Cursorline" })
+map("n", "<leader>tl", function() Util.toggle("cursorline") end, { desc = "Toggle Cursorline" })
 map("n", "<leader>tw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
 map("n", "<leader>tn", function() Util.toggle("number") end, { desc = "Toggle Number" })
+map("n", "<leader>tr", function() Util.toggle("relativenumber") end, { desc = "Toggle Relative Number" })
 map("n", "<leader>td", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 map(

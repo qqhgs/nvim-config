@@ -25,7 +25,7 @@ return {
           end
         end,
       },
-      indent = { enable = true },
+      -- indent = { enable = true },
       autotag = {
         enable = true,
       },

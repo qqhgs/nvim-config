@@ -17,9 +17,9 @@ local default_options = {
   laststatus = 3, -- use global status line
   -- list = true,
   mouse = "", -- ignore mouse
-  -- number = true,
+  number = true,
   -- pumblend = 4, -- pseudo-transparency for the popup-menu, value: 0 - 100
-  -- relativenumber = true,
+  relativenumber = true,
   ruler = false,
   scrolloff = 6,
   -- shell = "/usr/bin/bash",
@@ -46,6 +46,13 @@ local default_options = {
   visualbell = true,
   wrap = false,
   wildmode = { "longest", "full" },
+
+  foldenable = true,
+  foldmethod = "expr",
+  foldexpr = "v:lua.vim.treesitter.foldexpr()",
+  foldtext = "v:lua.vim.treesitter.foldtext()",
+
+  statuscolumn = [[%!v:lua.require'util.signcol'.column()]],
 }
 
 if vim.fn.has("nvim-0.9.0") == 1 then
@@ -82,8 +89,9 @@ vim.opt.fillchars:append({
   vertleft = "┨",
   vertright = "┣",
   verthoriz = "╋",
-  foldopen = "",
   foldclose = "",
+  --  foldopen = "",
+  foldopen = "",
   diff = "/",
 })
 
@@ -99,4 +107,6 @@ for k, v in pairs(default_options) do
   vim.opt[k] = v
 end
 
-if vim.g.colors_name == nil then vim.cmd([[colorscheme habamax]]) end
+if vim.g.colors_name == nil then
+  vim.cmd([[colorscheme habamax]])
+end

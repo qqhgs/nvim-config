@@ -4,6 +4,6 @@ return {
   config = function()
     require("rest-nvim").setup()
 
-    vim.keymap.set("n", "<CR>", "<Plug>RestNvim", { buffer = true, silent = true })
+    vim.keymap.set("n", "<CR>", require("rest-nvim").run, { buffer = true, silent = true })
   end,
 }

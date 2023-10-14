@@ -33,6 +33,10 @@ return {
         formatting_options = nil,
         timeout_ms = nil,
       },
+      exclude_servers = {
+        -- "gopls",
+        -- "tsserver",
+      },
       -- LSP Server Settings
       servers = {
         -- jsonls = {},
@@ -90,6 +94,13 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
       local function setup(server)
+        -- disable some lsp
+        for _, name in pairs(opts.exclude_servers) do
+          if server == name then
+            return
+          end
+        end
+
         local server_opts = vim.tbl_deep_extend("force", {
           capabilities = vim.deepcopy(capabilities),
         }, servers[server] or {})
